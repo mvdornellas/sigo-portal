@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-portalsigo-dev-231902-authRole",
+      "UnauthRoleArn": "arn:aws:iam::542758816798:role/amplify-portalsigo-dev-231902-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::542758816798:role/amplify-portalsigo-dev-231902-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-portalsigo-dev-231902-deployment",
+      "UnauthRoleName": "amplify-portalsigo-dev-231902-unauthRole",
+      "StackName": "amplify-portalsigo-dev-231902",
+      "StackId": "arn:aws:cloudformation:us-east-2:542758816798:stack/amplify-portalsigo-dev-231902/cfa00170-7a34-11eb-b891-029cc9ea9bb6",
+      "AmplifyAppId": "dczp3her43hrm"
+    },
+    "categories": {
+      "auth": {
+        "portalsigob11504ad": {}
+      }
+    }
+  }
+}

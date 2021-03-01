@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "portalsigob11504ad": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

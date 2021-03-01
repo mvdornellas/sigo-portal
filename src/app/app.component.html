@@ -298,7 +298,13 @@
   }
 </style>
 
-<!-- Toolbar -->
+
+<amplify-authenticator *ngIf="authState !== 'signedin'"></amplify-authenticator>
+
+<div *ngIf="authState === 'signedin' && user" class="App">
+    <amplify-sign-out></amplify-sign-out>
+    <div>Hello, {{user.username}}</div>
+    <!-- Toolbar -->
 <div class="toolbar" role="banner">
   <img
     width="40"
@@ -530,5 +536,7 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
-
 <router-outlet></router-outlet>
+
+</div>
+
