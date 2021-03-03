@@ -1,0 +1,66 @@
+<mat-vertical-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="companyFormGroup" errorMessage="Informações de acessoria ou consultoria devem ser preenchidos">
+      <form [formGroup]="companyFormGroup">
+        <ng-template matStepLabel>Informações da acessoria ou consultoria</ng-template>
+        <mat-form-field>
+          <mat-label>Nome</mat-label>
+          <input matInput placeholder="Nome" formControlName="name" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Ex: empresa@gmail.com" formControlName="email" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>CNPJ</mat-label>
+            <input matInput placeholder="Ex: 04.164.149/0001-67" formControlName="cnpj" required>
+          </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="standardFormGroup" errorMessage="Norma técnica é obrigatório">
+        <form [formGroup]="standardFormGroup">
+          <ng-template matStepLabel>Normas técnicas</ng-template>
+            <mat-form-field appearance="fill">
+              <mat-label>Selecione uma opção</mat-label>
+              <mat-select formControlName="standards" multiple>
+                <mat-option *ngFor="let standard of standards" [value]="standard.id">
+                    {{ standard.name }}
+                  </mat-option>
+              </mat-select>
+            </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button mat-button matStepperNext>Próximo</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="hireFormGroup" errorMessage="Informações de contração devem ser preenchidos">
+        <form [formGroup]="hireFormGroup">
+          <ng-template matStepLabel>Informações de contratação</ng-template>
+          <mat-form-field>
+            <mat-label>Inicio</mat-label>
+            <input matInput placeholder="Ínicio da Contratação" formControlName="startHire" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Término</mat-label>
+            <input matInput placeholder="Fim da Contratação" formControlName="endHire" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button mat-button matStepperNext>Próximo</button>
+          </div>
+        </form>
+      </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Finalização</ng-template>
+        <p>
+          Após concluir, será disponibilizado através do email <b>{{this.companyFormGroup.controls.email.value}}</b> o link de acesso ao formulário de conformidade
+         </p>
+      <div>
+        <button mat-button matStepperPrevious>Voltar</button>
+        <button mat-button (click)="addCompany()">Concluir</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>

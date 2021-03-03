@@ -6930,6 +6930,13 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+mat-breadcrumb@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/mat-breadcrumb/-/mat-breadcrumb-1.0.1.tgz#b1af60dba559a5dd6dda9264f245b2cbbaf29365"
+  integrity sha512-0coq3WyLO9+S3MFMUkPNxsiSv9llkGBjrQ3X58nYBCgOmi50liXk6RYaIK+NZuIZN2TpZGn1O2tEGDc7yLyoVg==
+  dependencies:
+    tslib "^1.10.0"
+
 md5.js@^1.3.4:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/md5.js/-/md5.js-1.3.5.tgz#b5d07b8e3216e3e27cd728d72f70d1e6a342005f"

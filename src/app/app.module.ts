@@ -19,6 +19,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { LoginComponent } from './auth/login/login.component';
+import {MatBreadcrumbModule} from 'mat-breadcrumb';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { LoginComponent } from './auth/login/login.component';
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
+    MatBreadcrumbModule,
     LayoutModule,
     MatToolbarModule,
     MatSidenavModule,

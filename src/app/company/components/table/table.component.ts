@@ -1,39 +1,62 @@
+import { CompanyService } from './../../services/company.service';
 import { Component, OnInit } from '@angular/core';
-
+import {AfterViewInit, ViewChild} from '@angular/core';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  email: string;
+  name: number;
+  cnpj: number;
+  startHire: string;
+  endHire: string;
+  rating: number;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+  {name: 1, email: 'Hydrogen', cnpj: 1.0079, startHire: 'H' , endHire: 'teste', rating: 1},
+  {name: 2, email: 'Helium', cnpj: 4.0026, startHire: 'He' , endHire: 'teste', rating: 1},
+  {name: 3, email: 'Lithium', cnpj: 6.941, startHire: 'Li' , endHire: 'teste', rating: 1},
+  {name: 4, email: 'Beryllium', cnpj: 9.0122, startHire: 'Be' , endHire: 'teste', rating: 1},
+  {name: 5, email: 'Boron', cnpj: 10.811, startHire: 'B' , endHire: 'teste', rating: 1},
+  {name: 6, email: 'Carbon', cnpj: 12.0107, startHire: 'C' , endHire: 'teste', rating: 1},
+  {name: 7, email: 'Nitrogen', cnpj: 14.0067, startHire: 'N' , endHire: 'teste', rating: 1},
+  {name: 8, email: 'Oxygen', cnpj: 15.9994, startHire: 'O' , endHire: 'teste', rating: 1},
+  {name: 9, email: 'Fluorine', cnpj: 18.9984, startHire: 'F' , endHire: 'teste', rating: 1},
+  {name: 10, email: 'Neon', cnpj: 20.1797, startHire: 'Ne' , endHire: 'teste', rating: 1},
 ];
 
-
 @Component({
-  selector: 'app-table',
+  selector: 'app-table-company',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class CompanyTableComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+export class CompanyTableComponent implements OnInit,  AfterViewInit {
 
-  constructor() { }
+  constructor(private companyService: CompanyService) { }
+
+  displayedColumns: string[] = ['name', 'email', 'cnpj', 'startHire', 'endHire', 'rating'];
+  dataSource: any;
+
+  @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit(): void {
+    const companies = this.companyService.list();
+    this.dataSource = new MatTableDataSource(companies.map(company => {
+      return {
+        email: company.email,
+        name: company.name,
+        cnpj: company.cnpj,
+        startHire: company.startHire,
+        rating: company.rating,
+        endHire: company.endHire
+      } as unknown as PeriodicElement;
+    }));
+
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
   }
 
 }
