@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Auth, Amplify } from 'aws-amplify';
 
 const USER_DATA_KEY = 'user.data';
 
@@ -10,8 +9,7 @@ export type UserData = {
 };
 
 @Injectable()
-export class UserStorage {
-
+export class UserService {
     saveData(user: UserData): void {
         localStorage.setItem(USER_DATA_KEY, JSON.stringify(user));
     }
@@ -19,4 +17,6 @@ export class UserStorage {
     getData(): UserData {
         return JSON.parse(localStorage.getItem(USER_DATA_KEY)) as UserData;
     }
+
+    isLoggedIn = () => this.getData() !== null;
 }

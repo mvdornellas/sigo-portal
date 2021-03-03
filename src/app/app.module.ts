@@ -1,6 +1,5 @@
-import { AuthenticationComponent } from './authentication/authentication.component';
 import { CompanyModule } from './company/company.module';
-import { UserStorage } from './_shared/storage/user.storage';
+import { UserService } from './_shared/service/user.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -18,12 +17,14 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { LoginComponent } from './auth/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    AuthenticationComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -35,13 +36,14 @@ import { MatListModule } from '@angular/material/list';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
+    MatTooltipModule,
     LayoutModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
     CompanyModule
   ],
-  providers: [UserStorage],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

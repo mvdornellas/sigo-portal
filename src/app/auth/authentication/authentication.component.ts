@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { onAuthUIStateChange, CognitoUserInterface, AuthState, FormFieldTypes  } from '@aws-amplify/ui-components';
-import { UserData, UserStorage } from '../_shared/storage/user.storage';
+import { UserData, UserService } from '../../_shared/service/user.service';
 
 @Component({
   selector: 'app-authentication',
@@ -15,7 +16,7 @@ export class AuthenticationComponent implements OnInit {
   signUpformFields: FormFieldTypes;
   signInformFields: FormFieldTypes;
 
-  constructor(private ref: ChangeDetectorRef, private userStorage: UserStorage) {
+  constructor(private ref: ChangeDetectorRef) {
     this.signUpformFields = [
       {
         type: 'username',
@@ -60,20 +61,7 @@ export class AuthenticationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    onAuthUIStateChange((authState, authData) => {
-      this.authState = authState;
-      const currentUser = authData as CognitoUserInterface;
-      const currentUserData = {
-        username: currentUser.username,
-       ...currentUser.attributes
-      };
-      this.userStorage.saveData(currentUserData);
-      this.user = currentUserData;
-      this.ref.detectChanges();
-    });
+
   }
 
-  ngOnDestroy() {
-    return onAuthUIStateChange;
-  }
 }
