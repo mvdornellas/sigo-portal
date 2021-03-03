@@ -23,7 +23,7 @@
       <mat-icon>account_circle</mat-icon>
         {{this.user.username}}
       </button>
-      <button matTooltip="Sair" matTooltipPosition="above" mat-flat-button color="primary"> 
+      <button (click)="signOut()" matTooltip="Sair" matTooltipPosition="above" mat-flat-button color="primary"> 
       <mat-icon>power_settings_new</mat-icon>
       </button>
 

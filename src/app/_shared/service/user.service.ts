@@ -18,5 +18,9 @@ export class UserService {
         return JSON.parse(localStorage.getItem(USER_DATA_KEY)) as UserData;
     }
 
+    remove(): void {
+        localStorage.removeItem(USER_DATA_KEY);
+    }
+
     isLoggedIn = () => this.getData() !== null;
 }

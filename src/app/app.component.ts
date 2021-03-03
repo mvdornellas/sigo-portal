@@ -1,3 +1,4 @@
+import { Auth } from '@aws-amplify/auth';
 import { UserData, UserService } from './_shared/service/user.service';
 import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { onAuthUIStateChange, CognitoUserInterface, AuthState, FormFieldTypes  } from '@aws-amplify/ui-components';
@@ -5,6 +6,7 @@ import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -55,6 +57,13 @@ export class AppComponent implements OnInit, OnDestroy   {
 
   ngOnDestroy() {
     return onAuthUIStateChange;
+  }
+
+  signOut() {
+    this.isLoggedIn = false;
+    Auth.signOut();
+    this.userService.remove();
+    this.router.navigate(['/login']);
   }
 
 
