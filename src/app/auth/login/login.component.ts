@@ -1,5 +1,5 @@
-import {Component, OnInit } from '@angular/core';
-
+import {Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { AuthState, FormFieldTypes  } from '@aws-amplify/ui-components';
 import { UserData } from '../../_shared/service/user.service';
 
@@ -10,12 +10,6 @@ import { UserData } from '../../_shared/service/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  title = 'sigo';
-  user: UserData | undefined;
-  authState: AuthState;
-  signUpformFields: FormFieldTypes;
-  signInformFields: FormFieldTypes;
 
   constructor() {
     this.signUpformFields = [
@@ -61,8 +55,26 @@ export class LoginComponent implements OnInit {
     ];
   }
 
+  title = 'sigo';
+  user: UserData | undefined;
+  authState: AuthState;
+  signUpformFields: FormFieldTypes;
+  signInformFields: FormFieldTypes;
+
+  @Input() error: string | null;
+
+  form: FormGroup = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl(''),
+  });
+
   ngOnInit(): void {
 
+  }
+
+  submit(): void {
+    if (this.form.valid) {
+    }
   }
 
 }

@@ -26,6 +26,7 @@
     "aws-amplify": "^3.3.21",
     "css-star-rating": "^1.2.4",
     "mat-breadcrumb": "^1.0.1",
+    "ngx-charts": "^3.0.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

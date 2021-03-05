@@ -8,7 +8,7 @@
       <a mat-list-item routerLink="/company" routerLinkActive="active">Consultoria e Acessorias</a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content style="min-height: 100vh;">
     <mat-toolbar *ngIf="isLoggedIn" color="primary">
       <button
         type="button"
@@ -18,7 +18,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-    <span class="example-spacer"></span>
+      <span class="spacer"></span>
       <button matTooltip="{{this.user.name}}" matTooltipPosition="above" mat-flat-button color="primary"> 
       <mat-icon>account_circle</mat-icon>
         {{this.user.username}}
