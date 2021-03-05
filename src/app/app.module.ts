@@ -1,5 +1,6 @@
+import { SharedModule } from './_shared/shared.module';
 import { CompanyModule } from './company/company.module';
-import { UserService } from './_shared/service/user.service';
+import { AuthService } from './auth/services/auth.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -23,6 +24,9 @@ import {MatBreadcrumbModule} from 'mat-breadcrumb';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 
 @NgModule({
   declarations: [
@@ -32,9 +36,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   ],
   imports: [
     BrowserModule,
+    SharedModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AmplifyUIAngularModule,
+    MatSnackBarModule,
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
@@ -50,9 +56,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatProgressBarModule
   ],
-  providers: [UserService],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

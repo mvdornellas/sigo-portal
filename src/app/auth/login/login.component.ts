@@ -1,7 +1,10 @@
+import { AuthService } from './../services/auth.service';
 import {Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { AuthState, FormFieldTypes  } from '@aws-amplify/ui-components';
-import { UserData } from '../../_shared/service/user.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Auth } from 'aws-amplify';
+import { UserData } from '../services/auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { ProgressBarService } from 'src/app/_shared/services/progress-bar.service';
 
 
 @Component({
@@ -10,71 +13,63 @@ import { UserData } from '../../_shared/service/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  constructor() {
-    this.signUpformFields = [
-      {
-        type: 'username',
-        label: 'Username',
-        placeholder: 'Username',
-        required: false
-      },
-      {
-        type: 'email',
-        label: 'Email',
-        placeholder: 'Email',
-        required: true
-      },
-      {
-        type: 'name',
-        label: 'Nome',
-        placeholder: 'Nome',
-        required: true
-      },
-      {
-        type: 'password',
-        label: 'Senha',
-        placeholder: 'Senha',
-        required: true
-      }
-    ];
-
-    this.signInformFields = [
-      {
-        type: 'username',
-        label: 'Username',
-        placeholder: 'Login',
-        required: false
-      },
-      {
-        type: 'password',
-        label: 'Senha',
-        placeholder: 'Senha',
-        required: true
-      }
-    ];
-  }
-
   title = 'sigo';
   user: UserData | undefined;
-  authState: AuthState;
-  signUpformFields: FormFieldTypes;
-  signInformFields: FormFieldTypes;
 
   @Input() error: string | null;
 
-  form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
+  loginForm: FormGroup = new FormGroup({
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
   });
+
+  constructor(private authService: AuthService, private snackBar: MatSnackBar, private progressBarService: ProgressBarService) {}
+
 
   ngOnInit(): void {
 
   }
 
-  submit(): void {
-    if (this.form.valid) {
+  login(): void {
+    if (this.loginForm.valid) {
+      this.progressBarService.show();
+      const {username, password} = this.loginForm.value;
+      Auth.signIn({
+        username,
+        password
+      }).then(user => {
+      this.progressBarService.hide();
+      this.authService.announceAuthicated({
+          username: user.username,
+          ...user.attributes
+        });
+      }).catch(error => {
+      this.progressBarService.hide();
+      this.handleAuthError(error);
+      });
     }
   }
+
+  handleAuthError({code}: {
+    code: string,
+    message: string,
+    name: string
+  }): void {
+
+    switch (code) {
+        case 'UserNotFoundException':
+          this.snackBar.open('Usuário não encontrado', 'Entendi', {
+          duration: 3000
+          });
+          break;
+        case 'NotAuthorizedException':
+          this.snackBar.open('Usuário ou senha inválido', 'Entendi', {
+            duration: 3000
+          });
+          break;
+        default:
+          break;
+      }
+    }
 
 }

@@ -4,3 +4,7 @@
 .grid-container {
     padding: 20px;
 }
+
+mat-toolbar {
+    justify-content: center;
+}

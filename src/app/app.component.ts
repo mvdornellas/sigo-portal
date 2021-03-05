@@ -1,11 +1,12 @@
+import { ProgressBarService } from './_shared/services/progress-bar.service';
 import { Auth } from '@aws-amplify/auth';
-import { UserData, UserService } from './_shared/service/user.service';
-import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
-import { onAuthUIStateChange, CognitoUserInterface, AuthState, FormFieldTypes  } from '@aws-amplify/ui-components';
+import { UserData, AuthService } from './auth/services/auth.service';
+import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -13,11 +14,11 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy   {
+export class AppComponent implements OnInit   {
   title = 'sigo';
   user: UserData;
-  isLoggedIn;
-  authState: AuthState;
+  isLoggedIn = false;
+  isLoadingProgressBar = false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -25,43 +26,30 @@ export class AppComponent implements OnInit, OnDestroy   {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private userService: UserService,
-              private router: Router, private ref: ChangeDetectorRef , private zone: NgZone) {
-    this.user = this.userService.getData();
+  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService,
+              private router: Router, private ref: ChangeDetectorRef , private zone: NgZone,
+              private progressBarService: ProgressBarService, private httpClient: HttpClient) {
+    this.user = this.authService.getUserData();
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.userService.isLoggedIn();
-    onAuthUIStateChange((authState, authData) => {
-      this.authState = authState;
-      if (authState === 'signedin'){
-        const currentUser = authData as CognitoUserInterface;
-        const currentUserData = {
-          username: currentUser.username,
-         ...currentUser.attributes
-        };
-        this.userService.saveData(currentUserData);
-        this.user = currentUserData;
-        this.zone.run(() => {
-         this.isLoggedIn = true;
-        });
-      }
-      this.ref.detectChanges();
-      this.zone.run(() => {
-        this.router.navigate(['/dashboard']);
-      });
+    this.isLoggedIn = this.authService.isLoggedIn();
+    this.authService.authenticatedAnnounced$.subscribe(user => {
+      this.isLoggedIn = true;
+      this.user = user;
+      this.router.navigate(['/dashboard']);
+
+    });
+
+    this.progressBarService.isLoading$.subscribe(isLoading => {
+      this.isLoadingProgressBar = isLoading;
     });
   }
 
-
-  ngOnDestroy() {
-    return onAuthUIStateChange;
-  }
-
-  signOut() {
+  signOut(): void {
     this.isLoggedIn = false;
     Auth.signOut();
-    this.userService.remove();
+    this.authService.removeUserData();
     this.router.navigate(['/login']);
   }
 
