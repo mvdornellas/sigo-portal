@@ -2,7 +2,7 @@ import { StandardsModule } from './../standards/standards.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CompanyService } from './services/company.service';
-import { CompanyTableComponent } from './components/table/table.component';
+import { CompanyTableComponent, ComplianceRatingComponent } from './components/table/table.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '../app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,16 +18,27 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import {  MatListModule } from '@angular/material/list';
+
+
+
+import { CompanyComplianceComponent } from './components/compliance/compliance.component';
+import { StarRatingModule } from 'angular-star-rating';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 
 @NgModule({
-  declarations: [CompanyTableComponent, CompanyAddComponent],
+  declarations: [CompanyTableComponent, CompanyAddComponent, CompanyComplianceComponent, ComplianceRatingComponent],
   imports: [
     CommonModule,
     StandardsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    StarRatingModule.forRoot(),
     MatTableModule,
     MatSortModule,
     MatCardModule,
@@ -39,9 +50,14 @@ import { MatSelectModule } from '@angular/material/select';
     FormsModule,
     ReactiveFormsModule,
     MatStepperModule,
-    MatSelectModule
+    MatSelectModule,
+    MatGridListModule,
+    MatExpansionModule,
+    MatBottomSheetModule,
+    MatListModule,
+    MatSidenavModule
   ],
   providers: [CompanyService],
-  exports: [CompanyTableComponent, CompanyAddComponent]
+  exports: [CompanyTableComponent, CompanyAddComponent, CompanyComplianceComponent]
 })
 export class CompanyModule { }

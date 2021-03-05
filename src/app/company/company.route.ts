@@ -2,6 +2,8 @@ import { CompanyAddComponent } from './components/add/add.component';
 import { Routes } from '@angular/router';
 import { AuthGuard } from '../auth.guard';
 import { CompanyTableComponent } from './components/table/table.component';
+import { CompanyComplianceComponent } from './components/compliance/compliance.component';
+import { ComplianceGuard } from './guard/compliance.guard';
 
 export const companyRoutes: Routes = [{
     path: 'company',
@@ -41,5 +43,11 @@ export const companyRoutes: Routes = [{
             url: ''
         },
       ]
-    }
-  }];
+    },
+  },
+  {
+    path: 'company/:id/compliance/:token',
+    component: CompanyComplianceComponent,
+    canActivate: [ComplianceGuard]
+  }
+];

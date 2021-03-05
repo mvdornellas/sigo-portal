@@ -6,3 +6,10 @@ th.mat-sort-header-sorted {
   color: black;
 }
 
+
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: end !important;
+  margin-bottom: 5px;
+}

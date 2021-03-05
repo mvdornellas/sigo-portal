@@ -1,8 +1,9 @@
-import { CompanyService } from './../../services/company.service';
+import { CompanyModel, CompanyService } from './../../services/company.service';
 import { Component, OnInit } from '@angular/core';
 import {AfterViewInit, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 
 export interface PeriodicElement {
   email: string;
@@ -33,10 +34,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class CompanyTableComponent implements OnInit,  AfterViewInit {
 
-  constructor(private companyService: CompanyService) { }
+  constructor(private companyService: CompanyService, private bottomSheet: MatBottomSheet) { }
 
   displayedColumns: string[] = ['name', 'email', 'cnpj', 'startHire', 'endHire', 'rating'];
   dataSource: any;
+  panelOpenState = false;
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -48,7 +50,7 @@ export class CompanyTableComponent implements OnInit,  AfterViewInit {
         name: company.name,
         cnpj: company.cnpj,
         startHire: company.startHire,
-        rating: company.rating,
+        standards: company.standards,
         endHire: company.endHire
       } as unknown as PeriodicElement;
     }));
@@ -59,4 +61,33 @@ export class CompanyTableComponent implements OnInit,  AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
+  openBottomSheet(company: CompanyModel): void {
+  this.bottomSheet.open(ComplianceRatingComponent, {
+      data: {company}
+    });
+  }
+
+}
+
+@Component({
+  selector: 'app-compliance-rating',
+  templateUrl: 'compliance-rating.html',
+})
+export class ComplianceRatingComponent {
+  standards: Array<{
+    id: string,
+    name: string,
+    rating?: number
+}>;
+  constructor(private bottomSheetRef: MatBottomSheetRef<CompanyTableComponent>) {
+    const data = this.bottomSheetRef.containerInstance.bottomSheetConfig.data;
+    const {standards} = data.company;
+    this.standards = standards;
+    console.log(this.standards);
+  }
+
+  openLink(event: MouseEvent): void {
+    this.bottomSheetRef.dismiss();
+    event.preventDefault();
+  }
 }

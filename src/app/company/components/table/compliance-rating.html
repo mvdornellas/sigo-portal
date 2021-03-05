@@ -1,0 +1,6 @@
+<mat-nav-list>
+    <a *ngFor="let standard of standards" href="#" mat-list-item (click)="openLink($event)">
+      <span mat-line>{{standard.name}}</span>
+      <star-rating class="rating" starRatingSizes="large" [rating]="standard.rating" [readOnly]="true" numOfStars="10" > </star-rating> 
+    </a>
+</mat-nav-list>

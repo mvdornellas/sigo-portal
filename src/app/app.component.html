@@ -28,7 +28,7 @@
       </button>
 
     </mat-toolbar>
-    <lib-mat-breadcrumb></lib-mat-breadcrumb>
+    <lib-mat-breadcrumb *ngIf="isLoggedIn" bgColor="#303030" fontColor="#fff" lastLinkColor="#7b1fa2" fontSize="8px"></lib-mat-breadcrumb>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
