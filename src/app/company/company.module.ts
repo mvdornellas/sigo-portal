@@ -22,9 +22,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import {  MatListModule } from '@angular/material/list';
-
-
-
 import { CompanyComplianceComponent } from './components/compliance/compliance.component';
 import { StarRatingModule } from 'angular-star-rating';
 import { MatSidenavModule } from '@angular/material/sidenav';
