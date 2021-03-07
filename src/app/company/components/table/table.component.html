@@ -44,6 +44,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
+          <p *ngIf="dataSource === null" style="text-align: center;"><b>Carregando...</b></p>
     </mat-card-content>
     <mat-card-actions>
         <button matTooltip="Adicionar consultoria e acessorrias" matTooltipPosition="above" mat-flat-button color="primary" routerLink="/company/add"> Cadastrar </button>

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import {
   HttpEvent,
   HttpInterceptor,
@@ -11,10 +11,11 @@ import { finalize } from 'rxjs/operators';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
-    constructor(private progressBarService: ProgressBarService) {}
+    constructor(@Inject('BASE_API_URL') private baseApiUrl: string, private progressBarService: ProgressBarService) {}
 
-    intercept( request: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
+    intercept(request: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
+        const api = request.clone({ url: `${this.baseApiUrl}/${request.url}` });
         this.progressBarService.show();
-        return next.handle(request).pipe(finalize(() => this.progressBarService.hide()));
+        return next.handle(api).pipe(finalize(() => this.progressBarService.hide()));
     }
 }

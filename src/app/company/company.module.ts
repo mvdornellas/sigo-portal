@@ -25,6 +25,8 @@ import {  MatListModule } from '@angular/material/list';
 import { CompanyComplianceComponent } from './components/compliance/compliance.component';
 import { StarRatingModule } from 'angular-star-rating';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatExpansionModule,
     MatBottomSheetModule,
     MatListModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ],
   providers: [CompanyService],
   exports: [CompanyTableComponent, CompanyAddComponent, CompanyComplianceComponent]

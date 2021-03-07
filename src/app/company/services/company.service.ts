@@ -1,51 +1,37 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BaseResponse } from 'src/app/_shared/services/base.service.response';
 
 export type CompanyModel = {
-    id: number
+    id: string
     name: string,
     email: string,
-    cnpj: string,
-    standards: Array<{
-        id: string,
-        name: string,
-        rating?: number
-    }>
+    cnpj: number,
     startHire: string,
     endHire: string,
+    standards: any
     token?: string
 };
 
 @Injectable()
 export class CompanyService {
-    add(company: CompanyModel): boolean{
-        return true;
+    constructor(private client: HttpClient) {}
+
+    async create(company: CompanyModel): Promise<boolean> {
+        const {success, data} = await this.client.post<BaseResponse<boolean>>(`company`, company).toPromise();
+        return success;
     }
 
-    list(): Array<CompanyModel>{
-        return  [{
-            id: 1,
-            name: 'Marcos teste',
-            cnpj: 'jh83272983',
-            email: 'dornellas13@gmail.com',
-            endHire: '7689732',
-            startHire: '2828923',
-            standards: [{id: 'NR-1', name: 'TESTE NR-1', rating: 10 }, {id: 'NR-2', name: 'TESTE NR-2', rating: 3 }, {id: 'NR-3', name: 'TESTE NR-3', rating: 5 }, {id: 'NR-5', name: 'TESTE NR-5', rating: 10 }]
-        }, {
-            id: 1,
-            name: 'Marcos teste',
-            cnpj: 'jh83272983',
-            email: 'dornellas13@gmail.com',
-            endHire: '7689732',
-            startHire: '2828923',
-            standards: [{id: 'NR-1', name: 'TESTE NR-1', rating: 10 }, {id: 'NR-2', name: 'TESTE NR-2', rating: 3 }, {id: 'NR-3', name: 'TESTE NR-3', rating: 5 }, {id: 'NR-5', name: 'TESTE NR-5', rating: 10 }]
-        }];
+    async list(): Promise<Array<CompanyModel>> {
+        const { data, success } = await this.client.get<BaseResponse<Array<CompanyModel>>>(`company`).toPromise();
+        return data;
     }
 
     get(id: number): CompanyModel {
         return {
-            id: 1,
+            id: '8q397323',
             name: 'Marcos teste',
-            cnpj: 'jh83272983',
+            cnpj: 239892392,
             email: 'dornellas13@gmail.com',
             endHire: '7689732',
             startHire: '2828923',

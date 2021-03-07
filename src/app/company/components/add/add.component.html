@@ -39,13 +39,17 @@
       <mat-step [stepControl]="hireFormGroup" errorMessage="Informações de contração devem ser preenchidos">
         <form [formGroup]="hireFormGroup">
           <ng-template matStepLabel>Informações de contratação</ng-template>
-          <mat-form-field>
+          <mat-form-field appearance="fill">
             <mat-label>Inicio</mat-label>
-            <input matInput placeholder="Ínicio da Contratação" formControlName="startHire" required>
+            <input matInput [matDatepicker]="pickerStartHire" placeholder="Ínicio da Contratação" formControlName="startHire" required>
+            <mat-datepicker-toggle matSuffix [for]="pickerStartHire"></mat-datepicker-toggle>
+            <mat-datepicker #pickerStartHire></mat-datepicker>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Término</mat-label>
-            <input matInput placeholder="Fim da Contratação" formControlName="endHire" required>
+            <input matInput [matDatepicker]="pickerEndHire" placeholder="Fim da Contratação" formControlName="endHire" required>
+            <mat-datepicker-toggle matSuffix [for]="pickerEndHire"></mat-datepicker-toggle>
+            <mat-datepicker #pickerEndHire></mat-datepicker>
           </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Voltar</button>

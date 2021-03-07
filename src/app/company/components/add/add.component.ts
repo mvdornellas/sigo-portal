@@ -72,25 +72,26 @@ export class CompanyAddComponent implements OnInit {
       standards: ['', Validators.required]
     });
     this.hireFormGroup = this.formBuilder.group({
-      startHire: ['', Validators.required],
+      startHire: [new Date(), Validators.required],
       endHire: ['', Validators.required],
     });
   }
 
-  addCompany(): void{
-    console.log(this.companyFormGroup.controls);
+  async addCompany(): Promise<void> {
     const {name, cnpj, email} = this.companyFormGroup.controls;
     const {standards} = this.standardFormGroup.controls;
     const {startHire, endHire} = this.hireFormGroup.controls;
 
-    if (this.companyService.add({
+    const companyCreated = await this.companyService.create({
       name: name.value,
       cnpj: cnpj.value,
       email: email.value,
-      standards: standards.value.map(value => STANDARDS.find(a => a.id === value)),
-      startHire: startHire.value,
-      endHire: endHire.value
-    } as CompanyModel)){
+      // standards: standards.value.map(value => STANDARDS.find(a => a.id === value)),
+      startHire: new Date(startHire.value).toISOString(),
+      endHire: new Date(endHire.value).toISOString()
+    } as CompanyModel);
+
+    if (companyCreated) {
       this.router.navigate(['/company']);
     }
 
