@@ -6,7 +6,7 @@
     "framework": "angular",
     "config": {
       "SourceDir": "src",
-      "DistributionDir": "dist",
+      "DistributionDir": "dist/sigo-portal",
       "BuildCommand": "npm run build",
       "StartCommand": "ng serve"
     }

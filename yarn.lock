@@ -3200,6 +3200,14 @@ autoprefixer@10.2.4:
     normalize-range "^0.1.2"
     postcss-value-parser "^4.1.0"
 
+aws-amplify-angular@^5.0.51:
+  version "5.0.51"
+  resolved "https://registry.yarnpkg.com/aws-amplify-angular/-/aws-amplify-angular-5.0.51.tgz#55aaed575125f6e5c4fd82a076533ab603a27b31"
+  integrity sha512-40Ej+7HaioUBzRhWeHr6K+BWn4MlCV1Iz0afKi/Cnk4LGHjcBQdnl4GROzX4dTlPi3tAYShkkdNzKVNxypN8pg==
+  dependencies:
+    "@aws-amplify/ui" "2.0.2"
+    rxjs-compat "^6.2.1"
+
 aws-amplify@^3.3.21:
   version "3.3.21"
   resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-3.3.21.tgz#bc8479d94cef34d9c8ecb335c6e977b2484e830e"
@@ -8941,6 +8949,11 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   integrity sha1-6Eg5bwV9Ij8kOGkkYY4laUFh7Ec=
   dependencies:
     aproba "^1.1.1"
+
+rxjs-compat@^6.2.1:
+  version "6.6.6"
+  resolved "https://registry.yarnpkg.com/rxjs-compat/-/rxjs-compat-6.6.6.tgz#5fc76a1ff1e6a3f3c5c773826b2ae1deea51da80"
+  integrity sha512-P6JOpjCYUBdXLMktko0a6JHltGaktFJA2W3DWDIjc+I9x9IwRQprOrHQf/fIykY3wAaSbbZIt6GASGMVC1mGfQ==
 
 rxjs@6.6.3:
   version "6.6.3"

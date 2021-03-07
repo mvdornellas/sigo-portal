@@ -37,6 +37,7 @@
     "@angular/compiler-cli": "~11.2.3",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
+    "aws-amplify-angular": "^5.0.51",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
