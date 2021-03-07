@@ -7321,6 +7321,13 @@ ngx-charts@^3.0.2:
   resolved "https://registry.yarnpkg.com/ngx-charts/-/ngx-charts-3.0.2.tgz#4c83d4d27408d51af0cace4436a58b823aeaf53d"
   integrity sha1-TIPU0nQI1Rrwys5ENqWLgjrq9T0=
 
+ngx-mask@^11.1.4:
+  version "11.1.4"
+  resolved "https://registry.yarnpkg.com/ngx-mask/-/ngx-mask-11.1.4.tgz#5e10763c6862dfafa69d8dc49ea914831f396c98"
+  integrity sha512-TyKObQvgr6xol1/cFuI8pyVF6kGQVgw7Xl83eOv8SfoOm8iUdfQODlyUOCGu1yRnQCBj/IF46RFDd1DlJJF2nw==
+  dependencies:
+    tslib "^2.0.0"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"

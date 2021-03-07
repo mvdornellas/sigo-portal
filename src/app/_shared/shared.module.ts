@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProgressBarService } from './services/progress-bar.service';
 import { InterceptorService } from './services/interceptor.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 
@@ -19,7 +20,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     },
     {
       provide: 'BASE_API_URL', useValue: environment.baseApiUrl
-    }
+    },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
   ],
   imports: [
     CommonModule,

@@ -1,3 +1,4 @@
+import { SharedModule } from './../_shared/shared.module';
 import { StandardsModule } from './../standards/standards.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -27,6 +28,7 @@ import { StarRatingModule } from 'angular-star-rating';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -34,6 +36,8 @@ import { MatNativeDateModule } from '@angular/material/core';
   imports: [
     CommonModule,
     StandardsModule,
+    NgxMaskModule.forRoot(),
+    SharedModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

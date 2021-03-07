@@ -7,6 +7,9 @@
         </mat-card-title>
         <mat-card-subtitle>kjkjk</mat-card-subtitle> -->
     </mat-card-header>
+    <mat-card-actions>
+        <button matTooltip="Adicionar consultoria e acessorrias" matTooltipPosition="above" mat-flat-button color="primary" routerLink="/company/add"> Cadastrar </button>
+    </mat-card-actions>
     <mat-card-content>
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
             <ng-container matColumnDef="name">
@@ -21,17 +24,17 @@
           
             <ng-container matColumnDef="cnpj">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> CNPJ  </th>
-              <td mat-cell *matCellDef="let element"> {{element.cnpj}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.cnpj | mask: '00.000.000/0000-00'}} </td>
             </ng-container>
           
             <ng-container matColumnDef="startHire">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Ínicio contratação  </th>
-              <td mat-cell *matCellDef="let element"> {{element.startHire}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.startHire | date: 'dd/MM/yyyy' }} </td>
             </ng-container>
 
             <ng-container matColumnDef="endHire">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Ínicio contratação  </th>
-                <td mat-cell *matCellDef="let element"> {{element.endHire}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.endHire | date: 'dd/MM/yyyy'}} </td>
               </ng-container>
               <ng-container matColumnDef="rating">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Avaliação  </th>
@@ -46,8 +49,6 @@
           </table>
           <p *ngIf="dataSource === null" style="text-align: center;"><b>Carregando...</b></p>
     </mat-card-content>
-    <mat-card-actions>
-        <button matTooltip="Adicionar consultoria e acessorrias" matTooltipPosition="above" mat-flat-button color="primary" routerLink="/company/add"> Cadastrar </button>
-    </mat-card-actions>
+   
 </mat-card>
 

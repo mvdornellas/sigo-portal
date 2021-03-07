@@ -1,9 +1,8 @@
 import { Router } from '@angular/router';
-import { CompanyService } from './../../services/company.service';
+import { CompanyModel, CompanyService } from './../../services/company.service';
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
-import { CompanyModel } from '../../services/company.service';
 
 
 const STANDARDS = [{id: 'NR1', name: 'DISPOSIÇÕES GERAIS'},
@@ -44,7 +43,6 @@ const STANDARDS = [{id: 'NR1', name: 'DISPOSIÇÕES GERAIS'},
 {id: 'NR36', name: 'SEGURANÇA E SAÚDE NO TRABALHO EM EMPRESAS DE ABATE E PROCESSAMENTO DE CARNES E DERIVADOS'},
 {id: 'NR37', name: 'SEGURANÇA E SAÚDE EM PLATAFORMAS DE PETRÓLEO'}];
 
-
 @Component({
   selector: 'app-add-company',
   templateUrl: './add.component.html',
@@ -64,16 +62,16 @@ export class CompanyAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.companyFormGroup = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required],
-      cnpj: ['', Validators.required]
+      name: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.email]],
+      cnpj: [null, [Validators.required]]
     });
     this.standardFormGroup = this.formBuilder.group({
-      standards: ['', Validators.required]
+      standards: [null, Validators.required]
     });
     this.hireFormGroup = this.formBuilder.group({
-      startHire: [new Date(), Validators.required],
-      endHire: ['', Validators.required],
+      startHire: [new Date(), [Validators.required]],
+      endHire: [null, [Validators.required]]
     });
   }
 

@@ -5,14 +5,26 @@
         <mat-form-field>
           <mat-label>Nome</mat-label>
           <input matInput placeholder="Nome" formControlName="name" required>
+          <mat-error *ngIf="companyFormGroup.controls.name.hasError('required')">
+            Nome é <strong>obrigatório</strong>
+        </mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Email</mat-label>
           <input matInput placeholder="Ex: empresa@gmail.com" formControlName="email" required>
+            <mat-error *ngIf="companyFormGroup.controls.email.hasError('email') && !companyFormGroup.controls.email.hasError('required')">
+                Por favor insira um endereço de e-mail válido
+            </mat-error>
+            <mat-error *ngIf="companyFormGroup.controls.email.hasError('required')">
+                Email é <strong>obrigatório</strong>
+            </mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>CNPJ</mat-label>
-            <input matInput placeholder="Ex: 04.164.149/0001-67" formControlName="cnpj" required>
+            <input type="text"  mask="00.000.000/0000-00" matInput placeholder="Ex: 04.164.149/0001-67" formControlName="cnpj" required>
+            <mat-error *ngIf="companyFormGroup.controls.cnpj.hasError('required')">
+                CNPJ é <strong>obrigatório</strong>
+            </mat-error>
           </mat-form-field>
         <div>
           <button mat-button matStepperNext>Próximo</button>
@@ -29,6 +41,9 @@
                     {{ standard.name }}
                   </mat-option>
               </mat-select>
+              <mat-error *ngIf="standardFormGroup.controls.standards.hasError('required')">
+                É necessário informar pelo menos uma norma técnica
+            </mat-error>
             </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Voltar</button>
@@ -44,12 +59,18 @@
             <input matInput [matDatepicker]="pickerStartHire" placeholder="Ínicio da Contratação" formControlName="startHire" required>
             <mat-datepicker-toggle matSuffix [for]="pickerStartHire"></mat-datepicker-toggle>
             <mat-datepicker #pickerStartHire></mat-datepicker>
+            <mat-error *ngIf="hireFormGroup.controls.startHire.hasError('required')">
+                Ínicio da contratação é <strong>obrigatório</strong>
+            </mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Término</mat-label>
             <input matInput [matDatepicker]="pickerEndHire" placeholder="Fim da Contratação" formControlName="endHire" required>
             <mat-datepicker-toggle matSuffix [for]="pickerEndHire"></mat-datepicker-toggle>
             <mat-datepicker #pickerEndHire></mat-datepicker>
+            <mat-error *ngIf="hireFormGroup.controls.endHire.hasError('required')">
+                Término da contratação é <strong>obrigatório</strong>
+            </mat-error>
           </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Voltar</button>

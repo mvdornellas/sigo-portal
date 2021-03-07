@@ -26,6 +26,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   ],
   imports: [
     BrowserModule,
+    NgxMaskModule.forRoot(),
     SharedModule,
     AppRoutingModule,
     BrowserAnimationsModule,
