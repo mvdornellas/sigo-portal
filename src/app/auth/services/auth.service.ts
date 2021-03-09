@@ -1,3 +1,4 @@
+import { Auth } from 'aws-amplify';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -32,5 +33,10 @@ export class AuthService {
     }
 
     isLoggedIn = () => this.getUserData() !== null;
+
+    getJwtToken = async () => {
+        const currentSession =  await Auth.currentSession();
+        return currentSession.getIdToken().getJwtToken();
+    }
 
 }

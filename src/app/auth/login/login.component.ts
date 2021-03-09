@@ -38,8 +38,8 @@ export class LoginComponent implements OnInit {
         username,
         password
       }).then(user => {
-      this.progressBarService.hide();
-      this.authService.announceAuthicated({
+        this.progressBarService.hide();
+        this.authService.announceAuthicated({
           username: user.username,
           ...user.attributes
         });
