@@ -84,7 +84,7 @@ export class CompanyAddComponent implements OnInit {
       name: name.value,
       cnpj: cnpj.value,
       email: email.value,
-      // standards: standards.value.map(value => STANDARDS.find(a => a.id === value)),
+      standards: standards.value.map(value => STANDARDS.find(a => a.id === value)),
       startHire: new Date(startHire.value).toISOString(),
       endHire: new Date(endHire.value).toISOString()
     } as CompanyModel);

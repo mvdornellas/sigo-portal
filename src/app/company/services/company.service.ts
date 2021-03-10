@@ -9,7 +9,10 @@ export type CompanyModel = {
     cnpj: number,
     startHire: string,
     endHire: string,
-    standards: any
+    standards: Array<{
+        id: string,
+        name: string
+    }>
     token?: string
 };
 
@@ -18,12 +21,12 @@ export class CompanyService {
     constructor(private client: HttpClient) {}
 
     async create(company: CompanyModel): Promise<boolean> {
-        const {success, data} = await this.client.post<BaseResponse<boolean>>(`company`, company).toPromise();
+        const {success, data} = await this.client.post<BaseResponse<boolean>>(`companies`, company).toPromise();
         return success;
     }
 
     async list(): Promise<Array<CompanyModel>> {
-        const { data, success } = await this.client.get<BaseResponse<Array<CompanyModel>>>(`company`).toPromise();
+        const { data, success } = await this.client.get<BaseResponse<Array<CompanyModel>>>(`companies`).toPromise();
         return data;
     }
 
