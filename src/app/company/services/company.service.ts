@@ -9,7 +9,7 @@ export type CompanyModel = {
     cnpj: number,
     startHire: string,
     endHire: string,
-    standards: Array<{
+    standards?: Array<{
         id: string,
         name: string
     }>
@@ -25,7 +25,7 @@ export class CompanyService {
         return success;
     }
 
-    async list(): Promise<Array<CompanyModel>> {
+    async getAll(): Promise<Array<CompanyModel>> {
         const { data, success } = await this.client.get<BaseResponse<Array<CompanyModel>>>(`companies`).toPromise();
         return data;
     }

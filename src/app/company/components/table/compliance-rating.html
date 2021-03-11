@@ -1,4 +1,6 @@
 <mat-nav-list>
+    <p *ngIf="standards.length <= 0" style="text-align: center; padding-top: 10px;"><b>Carregando...</b></p>
+    <h2 *ngIf="standards.length > 0" style="text-align: center; padding-top: 10px;"><b>{{company.name}}</b></h2>
     <a *ngFor="let standard of standards" href="#" mat-list-item (click)="openLink($event)">
       <span mat-line>{{standard.name}}</span>
       <star-rating class="rating" starRatingSizes="large" [rating]="standard.rating" [readOnly]="true" numOfStars="10" > </star-rating> 

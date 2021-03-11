@@ -85,7 +85,7 @@
          </p>
       <div>
         <button mat-button matStepperPrevious>Voltar</button>
-        <button mat-button (click)="addCompany()">Concluir</button>
+        <button mat-button [disabled]="makingCompanyRegister" (click)="addCompany()">Concluir</button>
       </div>
     </mat-step>
   </mat-vertical-stepper>

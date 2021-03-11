@@ -1,3 +1,4 @@
+import { NotificationService } from './../../_shared/services/notification.service';
 import { AuthService } from './../services/auth.service';
 import {Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -23,7 +24,9 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required),
   });
 
-  constructor(private authService: AuthService, private snackBar: MatSnackBar, private progressBarService: ProgressBarService) {}
+  constructor(private authService: AuthService,
+              private notificationService: NotificationService,
+              private progressBarService: ProgressBarService) {}
 
 
   ngOnInit(): void {
@@ -58,14 +61,10 @@ export class LoginComponent implements OnInit {
 
     switch (code) {
         case 'UserNotFoundException':
-          this.snackBar.open('Usuário não encontrado', 'Entendi', {
-          duration: 3000
-          });
+          this.notificationService.show('Usuário não encontrado', 'Entendi');
           break;
         case 'NotAuthorizedException':
-          this.snackBar.open('Usuário ou senha inválido', 'Entendi', {
-            duration: 3000
-          });
+          this.notificationService.show('Usuário ou senha inválido', 'Entendi');
           break;
         default:
           break;

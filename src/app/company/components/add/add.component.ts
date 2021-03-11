@@ -57,6 +57,7 @@ export class CompanyAddComponent implements OnInit {
   companyFormGroup: FormGroup;
   standardFormGroup: FormGroup;
   hireFormGroup: FormGroup;
+  makingCompanyRegister = false;
 
   constructor(private formBuilder: FormBuilder, private companyService: CompanyService, private router: Router) {}
 
@@ -76,6 +77,7 @@ export class CompanyAddComponent implements OnInit {
   }
 
   async addCompany(): Promise<void> {
+    this.makingCompanyRegister = true;
     const {name, cnpj, email} = this.companyFormGroup.controls;
     const {standards} = this.standardFormGroup.controls;
     const {startHire, endHire} = this.hireFormGroup.controls;
@@ -87,7 +89,10 @@ export class CompanyAddComponent implements OnInit {
       standards: standards.value.map(value => STANDARDS.find(a => a.id === value)),
       startHire: new Date(startHire.value).toISOString(),
       endHire: new Date(endHire.value).toISOString()
-    } as CompanyModel);
+    } as CompanyModel)
+    .catch(() => {
+      this.makingCompanyRegister = false;
+    });
 
     if (companyCreated) {
       this.router.navigate(['/company']);

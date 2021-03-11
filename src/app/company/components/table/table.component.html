@@ -37,9 +37,9 @@
                 <td mat-cell *matCellDef="let element"> {{element.endHire | date: 'dd/MM/yyyy'}} </td>
               </ng-container>
               <ng-container matColumnDef="rating">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Avaliação  </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Compliance  </th>
                 <td mat-cell *matCellDef="let element">
-                    <button mat-raised-button (click)="openBottomSheet(element)">Avaliação</button>
+                    <button mat-raised-button (click)="openBottomSheet(element)">Visualizar</button>
             
                 </td>
               </ng-container> 
@@ -47,7 +47,8 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
-          <p *ngIf="dataSource === null" style="text-align: center;"><b>Carregando...</b></p>
+          <p *ngIf="dataSource === null" style="text-align: center; padding-top: 10px;"><b>Carregando...</b></p>
+          <p *ngIf="dataSource !== null && companies && companies.length <= 0" style="text-align: center; padding-top: 10px;"><b>Nenhum registro encontrado</b></p>
     </mat-card-content>
    
 </mat-card>

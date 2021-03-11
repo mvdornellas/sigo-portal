@@ -1,3 +1,4 @@
+import { StandardService } from './services/standard.service';
 import { SharedModule } from './../_shared/shared.module';
 import { StandardsModule } from './../standards/standards.module';
 import { NgModule } from '@angular/core';
@@ -21,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import {  MatListModule } from '@angular/material/list';
 import { CompanyComplianceComponent } from './components/compliance/compliance.component';
@@ -28,6 +30,7 @@ import { StarRatingModule } from 'angular-star-rating';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+
 import { NgxMaskModule } from 'ngx-mask';
 
 
@@ -60,9 +63,10 @@ import { NgxMaskModule } from 'ngx-mask';
     MatListModule,
     MatSidenavModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatProgressBarModule
   ],
-  providers: [CompanyService],
+  providers: [CompanyService, StandardService],
   exports: [CompanyTableComponent, CompanyAddComponent, CompanyComplianceComponent]
 })
 export class CompanyModule { }

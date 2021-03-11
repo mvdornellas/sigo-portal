@@ -1,3 +1,4 @@
+import { NotificationService } from './notification.service';
 import { AuthService } from './../../auth/services/auth.service';
 import { Inject, Injectable } from '@angular/core';
 import {
@@ -8,13 +9,13 @@ import {
 } from '@angular/common/http';
 import { from, Observable } from 'rxjs';
 import { ProgressBarService } from './progress-bar.service';
-import { finalize } from 'rxjs/operators';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
     constructor(@Inject('BASE_API_URL') private baseApiUrl: string,
                 private progressBarService: ProgressBarService,
-                private authService: AuthService) {}
+                private authService: AuthService,
+                private notificationService: NotificationService) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
         return from(this.handle(request, next));
@@ -31,6 +32,10 @@ export class InterceptorService implements HttpInterceptor {
         });
         return next.handle(api)
         .toPromise()
+        .catch((e) => {
+            this.notificationService.show('Ocorreu um erro inesperado, por favor, tente mais tarde :/', 'Entendi');
+            return e;
+        })
         .finally(() => {
             this.progressBarService.hide();
         });

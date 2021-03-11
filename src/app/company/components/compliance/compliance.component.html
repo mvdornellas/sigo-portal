@@ -1,3 +1,23 @@
 <div>
-    <star-rating *ngFor="let standard of company.standards" [labelText]="standard.name" labelPosition="top" starRatingSizes="large" [numOfStars]="10" ></star-rating>
+    <h1>{{company.name}}</h1>
+    <form [formGroup]="form" *ngIf="form" (ngSubmit)="addCompliance()">
+        <div formArrayName="standards">
+            <div *ngFor="let standard of form.controls.standards.controls; let $index=index" [formGroupName]="$index">
+                <input formControlName="id" hidden>
+                <input formControlName="name" hidden>
+                <input formControlName="rating" hidden>
+                    <div style="padding-top: 15px;">
+                        <star-rating (starClickChange)="ratingChange($event, $index)" [rating]="standard.value.rating" [labelText]="standard.value.name" labelPosition="top" starRatingSizes="large" [numOfStars]="10" ></star-rating>
+                        <mat-error *ngIf="form.controls['standards'].controls[$index].controls['rating'].touched && form.controls['standards'].controls[$index].controls['rating'].hasError('required')">
+                            Avaliação é <strong>obrigatório</strong>
+                        </mat-error>
+                    </div>
+                 
+      
+            </div>
+        </div>
+      
+        <button type="submit">Enviar</button>
+
+    </form>
 </div>

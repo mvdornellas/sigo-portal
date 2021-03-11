@@ -5,12 +5,15 @@ import { ProgressBarService } from './services/progress-bar.service';
 import { InterceptorService } from './services/interceptor.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { NotificationService } from './services/notification.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
 @NgModule({
   declarations: [],
   providers: [
+    NotificationService,
     ProgressBarService,
     InterceptorService,
     {
@@ -25,7 +28,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
   ],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ]
 })
 export class SharedModule { }

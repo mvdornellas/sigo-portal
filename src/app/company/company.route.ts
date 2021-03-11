@@ -46,7 +46,7 @@ export const companyRoutes: Routes = [{
     },
   },
   {
-    path: 'company/:id/compliance/:token',
+    path: 'company/:id/compliance',
     component: CompanyComplianceComponent,
     canActivate: [ComplianceGuard]
   }
