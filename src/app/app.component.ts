@@ -48,9 +48,7 @@ export class AppComponent implements OnInit   {
 
   signOut(): void {
     this.isLoggedIn = false;
-    Auth.signOut();
-    this.authService.removeUserData();
-    this.router.navigate(['/login']);
+    this.authService.signOut();
   }
 
 

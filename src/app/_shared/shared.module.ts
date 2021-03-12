@@ -7,6 +7,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { NotificationService } from './services/notification.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { WebsocketService } from './services/ws.service';
 
 
 
@@ -16,14 +17,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     NotificationService,
     ProgressBarService,
     InterceptorService,
+    WebsocketService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
       multi: true
     },
-    {
-      provide: 'BASE_API_URL', useValue: environment.baseApiUrl
-    },
+    { provide: 'BASE_API_URL', useValue: environment.baseApiUrl },
+    { provide: 'WSS_URL', useValue: environment.wssUrl },
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
   ],
   imports: [

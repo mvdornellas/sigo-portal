@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { WebsocketService } from './../../_shared/services/ws.service';
 import { Auth } from 'aws-amplify';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
@@ -15,9 +17,12 @@ export class AuthService {
     private authenticated = new Subject<UserData>();
     authenticatedAnnounced$ = this.authenticated.asObservable();
 
+    constructor(private wssService: WebsocketService, private router: Router){}
+
     announceAuthicated(user: UserData): void {
         this.saveUserData(user);
         this.authenticated.next(user);
+        this.wssService.open();
     }
 
     private saveUserData(user: UserData): void {
@@ -28,7 +33,7 @@ export class AuthService {
         return JSON.parse(localStorage.getItem(USER_DATA_KEY)) as UserData;
     }
 
-    removeUserData(): void {
+    private removeUserData(): void {
         localStorage.removeItem(USER_DATA_KEY);
     }
 
@@ -37,6 +42,13 @@ export class AuthService {
     getJwtToken = async () => {
         const currentSession =  await Auth.currentSession();
         return currentSession.getIdToken().getJwtToken();
+    }
+
+    signOut(): void {
+        Auth.signOut();
+        this.removeUserData();
+        this.wssService.close();
+        this.router.navigate(['/login']);
     }
 
 }
