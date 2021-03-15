@@ -36,9 +36,17 @@ export class InterceptorService implements HttpInterceptor {
         const api = request.clone(option);
         return next.handle(api)
         .toPromise()
-        .catch((e) => {
-            this.notificationService.show('Ocorreu um erro inesperado, por favor, tente mais tarde :/', 'Entendi');
-            return e;
+        .catch(({error, status}) => {
+            console.log(error);
+            switch (status) {
+                case 500:
+                    this.notificationService.show('Ocorreu um erro inesperado, por favor, tente mais tarde :/', 'Entendi');
+                    return error;
+                case 409:
+                    return;
+                default:
+                    break;
+            }
         })
         .finally(() => {
             this.progressBarService.hide();

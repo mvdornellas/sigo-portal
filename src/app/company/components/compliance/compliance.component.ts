@@ -11,7 +11,9 @@ import { ComplianceService } from '../../services/compliance.service';
   styleUrls: ['./compliance.component.css']
 })
 export class CompanyComplianceComponent implements OnInit {
-  company: CompanyModel;
+  company: CompanyModel = null;
+  assessed = false;
+  complianceAlreayAssessed = false;
   form: FormGroup;
 
 
@@ -41,11 +43,15 @@ export class CompanyComplianceComponent implements OnInit {
     const standards = this.form.controls.standards as FormArray;
     console.log(standards.value);
 
-    this.complianceService.updateAll(this.company.id, standards.value);
+    const updated = await this.complianceService.updateAll(this.company.id, standards.value);
+    if (updated){
+      this.assessed = true;
+    }
   }
 
   async ratingChange(value, index): Promise<void> {
     const standards = this.form.controls.standards as FormArray;
+    console.log(standards);
     standards.controls[index].value.rating = value.rating;
   }
 

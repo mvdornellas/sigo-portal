@@ -4,3 +4,25 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-card {
+    flex-direction: column;
+    align-items: center;
+    margin: 1em;
+}
+
+.mat-card-actions {
+    margin-left: 0 !important;
+}
+
+.mat-stepper-next {
+    margin-top: 10px !important;
+}
+
+.mat-accent {
+    background-color: #0aaf9d !important;
+}
+
+.mat-accent-color {
+    color: #0aaf9d !important;
+}

@@ -1,0 +1,33 @@
+<body style="height: 100vh;">
+    <div class="stars">
+        <div class="custom-navbar">
+            <div *ngIf="!isLoggedIn" class="brand-logo" style="font-size: 50px; color: #0aaf9d;">
+                SIGO
+            </div>
+        </div>
+        <div class="central-body">
+            <img class="image-404" src="../../assets/images/erro404-nobutt.png" width="350px">
+            <a routerLink="/dashboard" class="btn-go-home" >INICIO</a>
+        </div>
+        <div class="objects">
+            <img class="object_rocket" src="../../assets/images/rocket.svg" width="40px">
+            <div class="earth-moon">
+                <img class="object_earth" src="../../assets/images/earth.svg" width="100px">
+                <img class="object_moon" src="../../assets/images/moon.svg" width="80px">
+            </div>
+            <div class="box_astronaut">
+                <img class="object_astronaut" src="../../assets/images/astronaut.svg" width="140px">
+            </div>
+        </div>
+        <div class="glowing_stars">
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+
+        </div>
+
+    </div>
+
+</body>

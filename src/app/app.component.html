@@ -5,13 +5,24 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar> 
       <div>
-        <a style="text-decoration: blink;color: #69f0ae; font-size: xx-large;" routerLink="/dashboard">SIGO</a>
+        <a class="mat-accent-color" style="text-decoration: blink; font-size: xx-large;" routerLink="/dashboard">SIGO</a>
 
       </div>
     </mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/company" routerLinkActive="active">Consultoria e Acessorias</a>
     </mat-nav-list>
+    <div class="stars">
+      <div class="objects">
+          <img class="object_rocket" src="../assets/images/rocket.svg" width="40px">
+      </div>
+      <div class="glowing_stars">
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+      </div>
+    </div>
   </mat-sidenav>
   <mat-sidenav-content style="min-height: 100vh;">
     <mat-progress-bar *ngIf="isLoadingProgressBar" mode="query" color="accent"></mat-progress-bar>
@@ -35,7 +46,11 @@
       </button>
 
     </mat-toolbar>
-    <lib-mat-breadcrumb *ngIf="isLoggedIn" bgColor="#303030" fontColor="#fff" lastLinkColor="#69f0ae" fontSize="8px"></lib-mat-breadcrumb>
+    <lib-mat-breadcrumb *ngIf="isLoggedIn" bgColor="#303030" fontColor="#fff" lastLinkColor="#0aaf9d" fontSize="8px"></lib-mat-breadcrumb>
+
     <router-outlet></router-outlet>
+
+      
+
   </mat-sidenav-content>
 </mat-sidenav-container>

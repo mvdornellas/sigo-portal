@@ -10,7 +10,8 @@
     <mat-card-actions>
         <button matTooltip="Adicionar consultoria e acessorrias" matTooltipPosition="above" mat-flat-button color="accent" routerLink="/company/add"> Cadastrar </button>
     </mat-card-actions>
-    <mat-card-content>
+    <mat-card-content style="width: 100%;
+    overflow-x: auto">
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>

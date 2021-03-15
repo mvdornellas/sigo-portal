@@ -1,91 +1,95 @@
-<mat-vertical-stepper [linear]="true" #stepper>
-    <mat-step [stepControl]="companyFormGroup" errorMessage="Informações de acessoria ou consultoria devem ser preenchidos">
-      <form [formGroup]="companyFormGroup">
-        <ng-template matStepLabel>Informações da acessoria ou consultoria</ng-template>
-        <mat-form-field>
-          <mat-label>Nome</mat-label>
-          <input matInput placeholder="Nome" formControlName="name" required>
-          <mat-error *ngIf="companyFormGroup.controls.name.hasError('required')">
-            Nome é <strong>obrigatório</strong>
-        </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input matInput placeholder="Ex: empresa@gmail.com" formControlName="email" required>
-            <mat-error *ngIf="companyFormGroup.controls.email.hasError('email') && !companyFormGroup.controls.email.hasError('required')">
-                Por favor insira um endereço de e-mail válido
-            </mat-error>
-            <mat-error *ngIf="companyFormGroup.controls.email.hasError('required')">
-                Email é <strong>obrigatório</strong>
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>CNPJ</mat-label>
-            <input type="text"  mask="00.000.000/0000-00" matInput placeholder="Ex: 04.164.149/0001-67" formControlName="cnpj" required>
-            <mat-error *ngIf="companyFormGroup.controls.cnpj.hasError('required')">
-                CNPJ é <strong>obrigatório</strong>
-            </mat-error>
-          </mat-form-field>
-        <div>
-          <button mat-flat-button color="accent" matStepperNext>Próximo</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="standardFormGroup" errorMessage="Norma técnica é obrigatório">
-        <form [formGroup]="standardFormGroup">
-          <ng-template matStepLabel>Normas técnicas</ng-template>
-            <mat-form-field appearance="fill">
-              <mat-label>Selecione uma opção</mat-label>
-              <mat-select formControlName="standards" multiple>
-                <mat-option *ngFor="let standard of standards" [value]="standard.id">
-                    {{ standard.name }}
-                  </mat-option>
-              </mat-select>
-              <mat-error *ngIf="standardFormGroup.controls.standards.hasError('required')">
-                É necessário informar pelo menos uma norma técnica
-            </mat-error>
-            </mat-form-field>
-          <div>
-            <button mat-button matStepperPrevious>Voltar</button>
-            <button mat-flat-button color="accent" matStepperNext>Próximo</button>
-          </div>
-        </form>
-      </mat-step>
-      <mat-step [stepControl]="hireFormGroup" errorMessage="Informações de contração devem ser preenchidos">
-        <form [formGroup]="hireFormGroup">
-          <ng-template matStepLabel>Informações de contratação</ng-template>
-          <mat-form-field appearance="fill">
-            <mat-label>Inicio</mat-label>
-            <input matInput [matDatepicker]="pickerStartHire" placeholder="Ínicio da Contratação" formControlName="startHire" required>
-            <mat-datepicker-toggle matSuffix [for]="pickerStartHire"></mat-datepicker-toggle>
-            <mat-datepicker #pickerStartHire></mat-datepicker>
-            <mat-error *ngIf="hireFormGroup.controls.startHire.hasError('required')">
-                Ínicio da contratação é <strong>obrigatório</strong>
-            </mat-error>
+<mat-card>
+  <mat-card-content>
+    <mat-vertical-stepper [linear]="true" #stepper>
+      <mat-step [stepControl]="companyFormGroup" errorMessage="Informações de acessoria ou consultoria devem ser preenchidos">
+        <form [formGroup]="companyFormGroup">
+          <ng-template matStepLabel>Informações da acessoria ou consultoria</ng-template>
+          <mat-form-field>
+            <mat-label>Nome</mat-label>
+            <input matInput placeholder="Nome" formControlName="name" required>
+            <mat-error *ngIf="companyFormGroup.controls.name.hasError('required')">
+              Nome é <strong>obrigatório</strong>
+          </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <mat-label>Término</mat-label>
-            <input matInput [matDatepicker]="pickerEndHire" placeholder="Fim da Contratação" formControlName="endHire" required>
-            <mat-datepicker-toggle matSuffix [for]="pickerEndHire"></mat-datepicker-toggle>
-            <mat-datepicker #pickerEndHire></mat-datepicker>
-            <mat-error *ngIf="hireFormGroup.controls.endHire.hasError('required')">
-                Término da contratação é <strong>obrigatório</strong>
-            </mat-error>
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Ex: empresa@gmail.com" formControlName="email" required>
+              <mat-error *ngIf="companyFormGroup.controls.email.hasError('email') && !companyFormGroup.controls.email.hasError('required')">
+                  Por favor insira um endereço de e-mail válido
+              </mat-error>
+              <mat-error *ngIf="companyFormGroup.controls.email.hasError('required')">
+                  Email é <strong>obrigatório</strong>
+              </mat-error>
           </mat-form-field>
+          <mat-form-field>
+              <mat-label>CNPJ</mat-label>
+              <input type="text"  mask="00.000.000/0000-00" matInput placeholder="Ex: 04.164.149/0001-67" formControlName="cnpj" required>
+              <mat-error *ngIf="companyFormGroup.controls.cnpj.hasError('required')">
+                  CNPJ é <strong>obrigatório</strong>
+              </mat-error>
+            </mat-form-field>
           <div>
-            <button mat-button matStepperPrevious>Voltar</button>
             <button mat-flat-button color="accent" matStepperNext>Próximo</button>
           </div>
         </form>
       </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Finalização</ng-template>
-        <p>
-          Após concluir, será disponibilizado através do email <b>{{this.companyFormGroup.controls.email.value}}</b> o link de acesso ao formulário de conformidade
-         </p>
-      <div>
-        <button mat-button matStepperPrevious>Voltar</button>
-        <button mat-flat-button color="accent" [disabled]="makingCompanyRegister" (click)="addCompany()">Concluir</button>
-      </div>
-    </mat-step>
-  </mat-vertical-stepper>
+      <mat-step [stepControl]="standardFormGroup" errorMessage="Norma técnica é obrigatório">
+          <form [formGroup]="standardFormGroup">
+            <ng-template matStepLabel>Normas técnicas</ng-template>
+              <mat-form-field appearance="fill">
+                <mat-label>Selecione uma opção</mat-label>
+                <mat-select formControlName="standards" multiple>
+                  <mat-option *ngFor="let standard of standards" [value]="standard.id">
+                      {{ standard.name }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="standardFormGroup.controls.standards.hasError('required')">
+                  É necessário informar pelo menos uma norma técnica
+              </mat-error>
+              </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious>Voltar</button>
+              <button mat-flat-button color="accent" matStepperNext>Próximo</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="hireFormGroup" errorMessage="Informações de contração devem ser preenchidos">
+          <form [formGroup]="hireFormGroup">
+            <ng-template matStepLabel>Informações de contratação</ng-template>
+            <mat-form-field appearance="fill">
+              <mat-label>Inicio</mat-label>
+              <input matInput [matDatepicker]="pickerStartHire" placeholder="Ínicio da Contratação" formControlName="startHire" required>
+              <mat-datepicker-toggle matSuffix [for]="pickerStartHire"></mat-datepicker-toggle>
+              <mat-datepicker #pickerStartHire></mat-datepicker>
+              <mat-error *ngIf="hireFormGroup.controls.startHire.hasError('required')">
+                  Ínicio da contratação é <strong>obrigatório</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Término</mat-label>
+              <input matInput [matDatepicker]="pickerEndHire" placeholder="Fim da Contratação" formControlName="endHire" required>
+              <mat-datepicker-toggle matSuffix [for]="pickerEndHire"></mat-datepicker-toggle>
+              <mat-datepicker #pickerEndHire></mat-datepicker>
+              <mat-error *ngIf="hireFormGroup.controls.endHire.hasError('required')">
+                  Término da contratação é <strong>obrigatório</strong>
+              </mat-error>
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious>Voltar</button>
+              <button mat-flat-button color="accent" matStepperNext>Próximo</button>
+            </div>
+          </form>
+        </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Finalização</ng-template>
+          <p>
+            Após concluir, será disponibilizado através do email <b>{{this.companyFormGroup.controls.email.value}}</b> o link de acesso ao formulário de conformidade
+           </p>
+        <div>
+          <button mat-button matStepperPrevious>Voltar</button>
+          <button mat-flat-button color="accent" [disabled]="makingCompanyRegister" (click)="addCompany()">Concluir</button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </mat-card-content>
+</mat-card>

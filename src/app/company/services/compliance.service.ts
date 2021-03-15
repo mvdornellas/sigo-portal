@@ -14,14 +14,15 @@ export class ComplianceService {
     constructor(private client: HttpClient) {}
 
     async get(id): Promise<ComplianceModel> {
-        const { data, success } = await this.client.get<BaseResponse<ComplianceModel>>(`companies/${id}/compliance`).toPromise();
-        return data;
+        const response = await this.client.get<BaseResponse<ComplianceModel>>(`companies/${id}/compliance`).toPromise();
+        return response.data;
     }
 
-    async updateAll(companyId: string, standards: StandardModel[]): Promise<StandardModel[]>{
-        const { data, success } = await this.client.put<BaseResponse<StandardModel[]>>(`companies/${companyId}/compliance`, {
+    async updateAll(companyId: string, standards: StandardModel[]): Promise<boolean>{
+        const response = await this.client.put<BaseResponse<StandardModel[]>>(`companies/${companyId}/compliance`, {
             standards
         }).toPromise();
-        return data;
+        console.log(response);
+        return response.success;
     }
 }
