@@ -44,8 +44,8 @@ export class AuthService {
         return currentSession.getIdToken().getJwtToken();
     }
 
-    signOut(): void {
-        Auth.signOut();
+    async signOut(): Promise<void> {
+        await Auth.signOut();
         this.removeUserData();
         this.wssService.close();
         this.router.navigate(['/login']);

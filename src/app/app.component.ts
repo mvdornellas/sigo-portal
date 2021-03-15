@@ -46,9 +46,9 @@ export class AppComponent implements OnInit   {
     });
   }
 
-  signOut(): void {
+  async signOut(): Promise<void> {
+    await this.authService.signOut();
     this.isLoggedIn = false;
-    this.authService.signOut();
   }
 
 

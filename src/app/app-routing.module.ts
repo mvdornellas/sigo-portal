@@ -24,8 +24,8 @@ const routes: Routes = [
     }
   },
   ...companyRoutes,
-  {path: 'notFound', component: NotFoundComponent},
-  {path: '**', redirectTo: '/notFound'},
+  {path: '404', component: NotFoundComponent},
+  {path: '**', redirectTo: '/404'},
 ];
 
 @NgModule({
