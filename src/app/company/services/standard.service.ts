@@ -12,8 +12,8 @@ export type StandardModel = {
 @Injectable()
 export class StandardService {
     constructor(private client: HttpClient) {}
-    async getAll(companyId: string): Promise<{company: CompanyModel, standards: StandardModel[] }> {
-        const { data, success } = await this.client.get<BaseResponse<{company: CompanyModel, standards: StandardModel[] }>>(`companies/${companyId}/standards`).toPromise();
+    async getAll(companyId: string): Promise<StandardModel[]> {
+        const { data, success } = await this.client.get<BaseResponse<StandardModel[]>>(`companies/${companyId}/standards`).toPromise();
         return data;
     }
 

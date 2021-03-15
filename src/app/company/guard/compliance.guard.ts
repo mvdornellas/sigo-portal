@@ -12,8 +12,7 @@ export class ComplianceGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       const {token, id: companyId} = route.params;
-      const company = this.companyService.get(companyId);
-      return company !== undefined;
+      return true;
   }
 
 }

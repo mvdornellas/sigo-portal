@@ -27,7 +27,7 @@
             </mat-error>
           </mat-form-field>
         <div>
-          <button mat-button matStepperNext>Próximo</button>
+          <button mat-flat-button color="accent" matStepperNext>Próximo</button>
         </div>
       </form>
     </mat-step>
@@ -47,7 +47,7 @@
             </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Voltar</button>
-            <button mat-button matStepperNext>Próximo</button>
+            <button mat-flat-button color="accent" matStepperNext>Próximo</button>
           </div>
         </form>
       </mat-step>
@@ -74,7 +74,7 @@
           </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Voltar</button>
-            <button mat-button matStepperNext>Próximo</button>
+            <button mat-flat-button color="accent" matStepperNext>Próximo</button>
           </div>
         </form>
       </mat-step>
@@ -85,7 +85,7 @@
          </p>
       <div>
         <button mat-button matStepperPrevious>Voltar</button>
-        <button mat-button [disabled]="makingCompanyRegister" (click)="addCompany()">Concluir</button>
+        <button mat-flat-button color="accent" [disabled]="makingCompanyRegister" (click)="addCompany()">Concluir</button>
       </div>
     </mat-step>
   </mat-vertical-stepper>

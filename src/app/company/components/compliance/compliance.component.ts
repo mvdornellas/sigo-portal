@@ -1,8 +1,9 @@
 import { ActivatedRoute } from '@angular/router';
-import { CompanyModel } from './../../services/company.service';
+import { CompanyModel, CompanyService } from './../../services/company.service';
 import { Component, OnInit } from '@angular/core';
 import { StandardModel, StandardService } from '../../services/standard.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ComplianceService } from '../../services/compliance.service';
 
 @Component({
   selector: 'app-compliance',
@@ -15,12 +16,12 @@ export class CompanyComplianceComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder,
-              private standardService: StandardService,
+              private complianceService: ComplianceService,
               private activatedRoute: ActivatedRoute) { }
 
   async ngOnInit(): Promise<void> {
     const {id: companyId} = this.activatedRoute.snapshot.params;
-    const { company, standards } = await this.standardService.getAll(companyId);
+    const { company, standards } = await this.complianceService.get(companyId);
     this.company = company;
     this.form = this.formBuilder.group({
       standards: this.formBuilder.array(standards.map(a => this.addStandardRow(a)))
@@ -40,7 +41,7 @@ export class CompanyComplianceComponent implements OnInit {
     const standards = this.form.controls.standards as FormArray;
     console.log(standards.value);
 
-    this.standardService.updateAll(this.company.id, standards.value);
+    this.complianceService.updateAll(this.company.id, standards.value);
   }
 
   async ratingChange(value, index): Promise<void> {

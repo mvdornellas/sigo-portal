@@ -82,7 +82,7 @@ export class ComplianceRatingComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    const {standards} = await this.standardService.getAll(this.company.id);
+    const standards = await this.standardService.getAll(this.company.id);
     this.standards = standards.map(standard => {
       return {
         id: standard.id,

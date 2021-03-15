@@ -1,23 +1,42 @@
-<div>
-    <h1>{{company.name}}</h1>
-    <form [formGroup]="form" *ngIf="form" (ngSubmit)="addCompliance()">
-        <div formArrayName="standards">
-            <div *ngFor="let standard of form.controls.standards.controls; let $index=index" [formGroupName]="$index">
-                <input formControlName="id" hidden>
-                <input formControlName="name" hidden>
-                <input formControlName="rating" hidden>
-                    <div style="padding-top: 15px;">
-                        <star-rating (starClickChange)="ratingChange($event, $index)" [rating]="standard.value.rating" [labelText]="standard.value.name" labelPosition="top" starRatingSizes="large" [numOfStars]="10" ></star-rating>
-                        <mat-error *ngIf="form.controls['standards'].controls[$index].controls['rating'].touched && form.controls['standards'].controls[$index].controls['rating'].hasError('required')">
-                            Avaliação é <strong>obrigatório</strong>
-                        </mat-error>
+<div >
+    <mat-card class="compliance-card">
+        <mat-card-header>
+            <mat-card-title>
+                Compliance
+            </mat-card-title>
+            <mat-card-subtitle>
+                Consultoria {{company.name}} - {{company.cnpj | mask: '00.000.000/0000-00'}}
+                <p>Contratação {{company.startHire | date: 'dd/MM/yyyy'}} - {{company.endHire | date: 'dd/MM/yyyy'}}</p>
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <h2 style="text-align: center;">Questionário de Avaliação</h2>
+            <form [formGroup]="form" *ngIf="form" (ngSubmit)="addCompliance()">
+                <div formArrayName="standards">
+                    <div *ngFor="let standard of form.controls.standards.controls; let $index=index" [formGroupName]="$index">
+                        <input formControlName="id" hidden>
+                        <input formControlName="name" hidden>
+                        <input formControlName="rating" hidden>
+                        <div>
+                            <p style="text-align: center;">{{standard.value.name}}</p>
+                            <div style="padding-bottom: 10px;">
+                                <star-rating (starClickChange)="ratingChange($event, $index)" [rating]="standard.value.rating" labelPosition="top" starRatingSizes="small" [numOfStars]="10" ></star-rating>
+                                <mat-error *ngIf="form.controls['standards'].controls[$index].controls['rating'].touched && form.controls['standards'].controls[$index].controls['rating'].hasError('required')">
+                                    Avaliação é <strong>obrigatório</strong>
+                                </mat-error>
+                            </div>
+                           
+                        </div>
+                       
+                         
+              
                     </div>
-                 
-      
-            </div>
-        </div>
-      
-        <button type="submit">Enviar</button>
-
-    </form>
+                </div>
+              
+                <button mat-flat-button color="accent" type="submit">Enviar</button>
+        
+            </form>
+        </mat-card-content>
+    </mat-card>
+   
 </div>

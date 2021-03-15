@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseResponse } from 'src/app/_shared/services/base.service.response';
+import { StandardModel } from './standard.service';
 
 export type CompanyModel = {
     id: string
@@ -40,13 +41,5 @@ export class CompanyService {
             startHire: '2828923',
             standards: [{id: 'NR-1', name: 'TESTE NR-1'  }, {id: 'NR-2', name: 'TESTE NR-2' }],
         };
-    }
-
-    update(company: CompanyModel): boolean {
-        return true;
-    }
-
-    checkComplianceAuthorization(companyId, token): boolean {
-        return true;
     }
 }

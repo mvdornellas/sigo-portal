@@ -1,3 +1,4 @@
+import { ComplianceService } from './services/compliance.service';
 import { StandardService } from './services/standard.service';
 import { SharedModule } from './../_shared/shared.module';
 import { StandardsModule } from './../standards/standards.module';
@@ -66,7 +67,7 @@ import { NgxMaskModule } from 'ngx-mask';
     MatDatepickerModule,
     MatProgressBarModule
   ],
-  providers: [CompanyService, StandardService],
+  providers: [CompanyService, StandardService, ComplianceService],
   exports: [CompanyTableComponent, CompanyAddComponent, CompanyComplianceComponent]
 })
 export class CompanyModule { }

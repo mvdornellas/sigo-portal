@@ -23,13 +23,17 @@ export class InterceptorService implements HttpInterceptor {
 
     async handle(request: HttpRequest<any>, next: HttpHandler): Promise<HttpEvent<any>> {
         this.progressBarService.show();
-        const token = await this.authService.getJwtToken();
-        const api = request.clone({
+        const option = {
             url: `${this.baseApiUrl}/${request.url}`,
-            setHeaders: {
+            setHeaders: {}
+        };
+        if (this.authService.isLoggedIn()) {
+            const token = await this.authService.getJwtToken();
+            option.setHeaders = {
                 Authorization: token
-            }
-        });
+            };
+        }
+        const api = request.clone(option);
         return next.handle(api)
         .toPromise()
         .catch((e) => {
