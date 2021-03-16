@@ -1,3 +1,4 @@
+import { NotificationService } from './../../../_shared/services/notification.service';
 import { ProgressBarService } from 'src/app/_shared/services/progress-bar.service';
 import { AuthService } from './../../../auth/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,22 +23,33 @@ export class CompanyComplianceComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private complianceService: ComplianceService,
               private activatedRoute: ActivatedRoute,
-              private progressBarService: ProgressBarService) {
+              private progressBarService: ProgressBarService,
+              private  authService: AuthService,
+              private notification: NotificationService,
+              private router: Router) {
                 this.progressBarService.isLoading$.subscribe(isLoading => {
                   this.loading = isLoading;
                 });
               }
 
   async ngOnInit(): Promise<void> {
-    const {id: companyId} = this.activatedRoute.snapshot.params;
-    const response = await this.complianceService.get(companyId);
-    if (response) {
-      const { company, standards } = response;
-      this.company = company;
-      this.form = this.formBuilder.group({
-      standards: this.formBuilder.array(standards.map(a => this.addStandardRow(a)))
-    });
+    if (this.authService.isLoggedIn()) {
+      this.notification.show('Gestor, você não pode visualizar o formulário de avaliação de conformidade, somente é possível visualizar as respostas!', 'Entendi', {
+        duration: 30000
+      });
+      await this.router.navigate(['/dashboard']);
+    } else{
+      const {id: companyId} = this.activatedRoute.snapshot.params;
+      const response = await this.complianceService.get(companyId);
+      if (response) {
+        const { company, standards } = response;
+        this.company = company;
+        this.form = this.formBuilder.group({
+        standards: this.formBuilder.array(standards.map(a => this.addStandardRow(a)))
+      });
     }
+  }
+
   }
 
   addStandardRow({id, name, rating}: StandardModel): FormGroup {
