@@ -48,7 +48,7 @@ export class AuthService {
         await Auth.signOut();
         this.removeUserData();
         this.wssService.close();
-        this.router.navigate(['/login']);
+        await this.router.navigate(['/login']);
     }
 
 }
