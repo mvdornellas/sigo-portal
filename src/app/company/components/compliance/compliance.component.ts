@@ -1,7 +1,8 @@
-import { ActivatedRoute } from '@angular/router';
-import { CompanyModel, CompanyService } from './../../services/company.service';
+import { AuthService } from './../../../auth/services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CompanyModel } from './../../services/company.service';
 import { Component, OnInit } from '@angular/core';
-import { StandardModel, StandardService } from '../../services/standard.service';
+import { StandardModel } from '../../services/standard.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ComplianceService } from '../../services/compliance.service';
 
@@ -12,18 +13,26 @@ import { ComplianceService } from '../../services/compliance.service';
 })
 export class CompanyComplianceComponent implements OnInit {
   company: CompanyModel = null;
-  assessed = false;
   complianceAlreayAssessed = false;
+  loading = false;
   form: FormGroup;
 
 
   constructor(private formBuilder: FormBuilder,
               private complianceService: ComplianceService,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private authService: AuthService,
+              private router: Router) { }
 
   async ngOnInit(): Promise<void> {
+    // const isLoggedIn = this.authService.isLoggedIn();
+    // if (isLoggedIn) {
+    //   this.router.navigate(['/dashboard']);
+    // }
     const {id: companyId} = this.activatedRoute.snapshot.params;
+    this.loading = true;
     const { company, standards } = await this.complianceService.get(companyId);
+    this.loading = false;
     this.company = company;
     this.form = this.formBuilder.group({
       standards: this.formBuilder.array(standards.map(a => this.addStandardRow(a)))
@@ -43,10 +52,9 @@ export class CompanyComplianceComponent implements OnInit {
     const standards = this.form.controls.standards as FormArray;
     console.log(standards.value);
 
+    this.loading = true;
     const updated = await this.complianceService.updateAll(this.company.id, standards.value);
-    if (updated){
-      this.assessed = true;
-    }
+    this.loading = false;
   }
 
   async ratingChange(value, index): Promise<void> {

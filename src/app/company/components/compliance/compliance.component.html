@@ -3,73 +3,73 @@
 <body style="height: 100vh;">
     <div class="stars">
         <div class="custom-navbar">
-            <div class="brand-logo" style="font-size: 50px; color: #0aaf9d;">
+            <div class="brand-logo" style="font-size: 50px" class="mat-accent-color">
                 SIGO
             </div>
         </div>
+        <div class="loading-indicator" *ngIf="loading">
+            <mat-spinner color="accent"></mat-spinner>
+            <p style="text-align: center; font-size:large; padding-top: 10px;"><b>Carregando...</b></p>
+        </div>
         <div class="central-body">
-            
-<div *ngIf="!complianceAlreayAssessed">
-    <p style="text-align: center; font-size:large; padding: 20px;" *ngIf="company === null && !assessed"><b>Carregando...</b></p>
-    <p style="text-align: center; font-size:large; padding: 20px;" *ngIf="assessed"><b>Obrigado</b></p>
-    <div *ngIf="company !== null && !assessed">
-        <form [formGroup]="form" *ngIf="form" (ngSubmit)="addCompliance()">
-        <mat-card>
-            <mat-card-header >
-                <mat-card-title>
-                    Consultoria e Acessorias
-                </mat-card-title>
-                <mat-card-subtitle>
-                    <p>{{company.name}} - {{company.cnpj | mask: '00.000.000/0000-00'}}</p>
-                    Contratação 
-                    <p>{{company.startHire | date: 'dd/MM/yyyy'}} - {{company.endHire | date: 'dd/MM/yyyy'}}</p>
-                </mat-card-subtitle>
-            </mat-card-header>
-        </mat-card>
-        <mat-card>
-            <mat-card-header >
-                <mat-card-title>
-                    Questionário de Avaliação
-                </mat-card-title>
-                <mat-card-subtitle>
-                    Preencha o questionário de avaliação abaixo para nos ajudar a melhorarmos nossa gestão de normas técnicas
-                </mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-                
-                    <div formArrayName="standards">
-                        <div *ngFor="let standard of form.controls.standards.controls; let $index=index" [formGroupName]="$index">
-                            <input formControlName="id" hidden>
-                            <input formControlName="name" hidden>
-                            <input formControlName="rating" hidden>
-                            <div>
-                                <p style="text-align: center; font-size: medium;">{{$index + 1}} - {{standard.value.name}} </p>
-                                <div style="padding-bottom: 10px;">
-                                    <star-rating size="medium" starRatingSpeed="noticeable" (starClickChange)="ratingChange($event, $index)" [rating]="standard.value.rating" labelPosition="right" starRatingSizes="small" [numOfStars]="10" labelText="{{form.controls['standards'].controls[$index].value.rating}}" ></star-rating>
-                                    <mat-error *ngIf="form.controls['standards'].controls[$index].controls['rating'].touched && form.controls['standards'].controls[$index].controls['rating'].hasError('required')">
-                                        Avaliação é <strong>obrigatório</strong>
-                                    </mat-error>
+
+            <div *ngIf="!complianceAlreayAssessed && company !== null">
+                    <form [formGroup]="form" *ngIf="form" (ngSubmit)="addCompliance()">
+                    <mat-card>
+                        <mat-card-header >
+                            <mat-card-title>
+                                Consultoria e Acessorias
+                            </mat-card-title>
+                            <mat-card-subtitle>
+                                <p>{{company.name}} - {{company.cnpj | mask: '00.000.000/0000-00'}}</p>
+                                Contratação 
+                                <p>{{company.startHire | date: 'dd/MM/yyyy'}} - {{company.endHire | date: 'dd/MM/yyyy'}}</p>
+                            </mat-card-subtitle>
+                        </mat-card-header>
+                    </mat-card>
+                    <mat-card>
+                        <mat-card-header >
+                            <mat-card-title>
+                                Questionário de Avaliação
+                            </mat-card-title>
+                            <mat-card-subtitle>
+                                Preencha o questionário de avaliação abaixo para nos ajudar a melhorarmos nossa gestão de normas técnicas
+                            </mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            
+                                <div formArrayName="standards">
+                                    <div *ngFor="let standard of form.controls.standards.controls; let $index=index" [formGroupName]="$index">
+                                        <input formControlName="id" hidden>
+                                        <input formControlName="name" hidden>
+                                        <input formControlName="rating" hidden>
+                                        <div>
+                                            <p style="text-align: center; font-size: medium;">{{$index + 1}} - {{standard.value.name}} </p>
+                                            <div style="padding-bottom: 10px;">
+                                                <star-rating size="medium" starRatingSpeed="noticeable" (starClickChange)="ratingChange($event, $index)" [rating]="standard.value.rating" labelPosition="right" starRatingSizes="small" [numOfStars]="10" labelText="{{form.controls['standards'].controls[$index].value.rating}}" ></star-rating>
+                                                <mat-error *ngIf="form.controls['standards'].controls[$index].controls['rating'].touched && form.controls['standards'].controls[$index].controls['rating'].hasError('required')">
+                                                    Avaliação é <strong>obrigatório</strong>
+                                                </mat-error>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
                                 </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-            </mat-card-content>
-                    <mat-card-actions style="text-align: center;">
-                    <button mat-flat-button style="width: 10%;" color="accent" type="submit">Enviar</button>
+                        </mat-card-content>
+                                <mat-card-actions style="text-align: center;">
+                                <button mat-flat-button style="width: 10%;" color="accent" type="submit">Enviar</button>
 
-                    </mat-card-actions>
-        </mat-card>
-    </form>
+                                </mat-card-actions>
+                    </mat-card>
+                </form>
 
-    </div>
-    
-</div>
+ 
+                
+            </div>
 
-<div *ngIf="complianceAlreayAssessed">
-    <p style="text-align: center; font-size:large; padding: 20px;" *ngIf="company === null && !assessed"><b>Já foi avaliado...</b></p>
-</div>
-
+            <div *ngIf="complianceAlreayAssessed">
+                <p style="text-align: center; font-size:large; padding: 20px;"><b>Já foi avaliado...</b></p>
+            </div>
 
         </div>
         <div class="objects">

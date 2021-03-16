@@ -30,6 +30,8 @@ import { CompanyComplianceComponent } from './components/compliance/compliance.c
 import { StarRatingModule } from 'angular-star-rating';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 import { MatNativeDateModule } from '@angular/material/core';
 
 import { NgxMaskModule } from 'ngx-mask';
@@ -65,7 +67,8 @@ import { NgxMaskModule } from 'ngx-mask';
     MatSidenavModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [CompanyService, StandardService, ComplianceService],
   exports: [CompanyTableComponent, CompanyAddComponent, CompanyComplianceComponent]

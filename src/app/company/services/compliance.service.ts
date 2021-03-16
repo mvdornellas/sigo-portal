@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { BaseResponse } from './../../_shared/services/base.service.response';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -14,7 +15,10 @@ export class ComplianceService {
     constructor(private client: HttpClient) {}
 
     async get(id): Promise<ComplianceModel> {
-        const response = await this.client.get<BaseResponse<ComplianceModel>>(`companies/${id}/compliance`).toPromise();
+        const response = await this.client
+        .get<BaseResponse<ComplianceModel>>(`companies/${id}/compliance`).toPromise().catch(e => {
+            throw e;
+        });
         return response.data;
     }
 
