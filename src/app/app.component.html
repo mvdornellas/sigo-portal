@@ -22,7 +22,7 @@
     </div>
   </mat-sidenav>
   <mat-sidenav-content style="min-height: 100vh;">
-    <mat-progress-bar *ngIf="isLoadingProgressBar" mode="query" color="accent"></mat-progress-bar>
+    <mat-progress-bar *ngIf="isLoading" mode="query" color="accent"></mat-progress-bar>
 
     <mat-toolbar *ngIf="isLoggedIn" color="primary">
       <button

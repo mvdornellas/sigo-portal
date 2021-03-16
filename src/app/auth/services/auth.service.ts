@@ -47,7 +47,6 @@ export class AuthService {
     async signOut(): Promise<void> {
         await Auth.signOut();
         this.removeUserData();
-        this.wssService.close();
         await this.router.navigate(['/login']);
     }
 

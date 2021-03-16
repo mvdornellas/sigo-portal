@@ -1,3 +1,4 @@
+import { ProgressBarService } from 'src/app/_shared/services/progress-bar.service';
 import { Router } from '@angular/router';
 import { CompanyModel, CompanyService } from './../../services/company.service';
 import {Component, OnInit} from '@angular/core';
@@ -58,8 +59,16 @@ export class CompanyAddComponent implements OnInit {
   standardFormGroup: FormGroup;
   hireFormGroup: FormGroup;
   makingCompanyRegister = false;
+  isLoading = false;
 
-  constructor(private formBuilder: FormBuilder, private companyService: CompanyService, private router: Router) {}
+  constructor(private formBuilder: FormBuilder,
+              private companyService: CompanyService,
+              private router: Router,
+              private progressBarService: ProgressBarService) {
+                this.progressBarService.isLoading$.subscribe(isLoading => {
+                  this.isLoading = isLoading;
+                });
+              }
 
   ngOnInit(): void {
     this.companyFormGroup = this.formBuilder.group({

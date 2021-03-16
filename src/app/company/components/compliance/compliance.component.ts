@@ -1,3 +1,4 @@
+import { ProgressBarService } from 'src/app/_shared/services/progress-bar.service';
 import { AuthService } from './../../../auth/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyModel } from './../../services/company.service';
@@ -21,22 +22,22 @@ export class CompanyComplianceComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private complianceService: ComplianceService,
               private activatedRoute: ActivatedRoute,
-              private authService: AuthService,
-              private router: Router) { }
+              private progressBarService: ProgressBarService) {
+                this.progressBarService.isLoading$.subscribe(isLoading => {
+                  this.loading = isLoading;
+                });
+              }
 
   async ngOnInit(): Promise<void> {
-    // const isLoggedIn = this.authService.isLoggedIn();
-    // if (isLoggedIn) {
-    //   this.router.navigate(['/dashboard']);
-    // }
     const {id: companyId} = this.activatedRoute.snapshot.params;
-    this.loading = true;
-    const { company, standards } = await this.complianceService.get(companyId);
-    this.loading = false;
-    this.company = company;
-    this.form = this.formBuilder.group({
+    const response = await this.complianceService.get(companyId);
+    if (response) {
+      const { company, standards } = response;
+      this.company = company;
+      this.form = this.formBuilder.group({
       standards: this.formBuilder.array(standards.map(a => this.addStandardRow(a)))
     });
+    }
   }
 
   addStandardRow({id, name, rating}: StandardModel): FormGroup {
@@ -50,11 +51,7 @@ export class CompanyComplianceComponent implements OnInit {
   async addCompliance(): Promise<void> {
     this.validateAllFormFields(this.form);
     const standards = this.form.controls.standards as FormArray;
-    console.log(standards.value);
-
-    this.loading = true;
     const updated = await this.complianceService.updateAll(this.company.id, standards.value);
-    this.loading = false;
   }
 
   async ratingChange(value, index): Promise<void> {

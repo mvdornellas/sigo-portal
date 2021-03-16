@@ -87,7 +87,7 @@
            </p>
         <div>
           <button mat-button matStepperPrevious>Voltar</button>
-          <button mat-flat-button color="accent" [disabled]="makingCompanyRegister" (click)="addCompany()">Concluir</button>
+          <button mat-flat-button color="accent" [disabled]="isLoading" (click)="addCompany()">Concluir</button>
         </div>
       </mat-step>
     </mat-vertical-stepper>

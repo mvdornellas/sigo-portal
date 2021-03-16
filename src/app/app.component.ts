@@ -1,7 +1,7 @@
 import { ProgressBarService } from './_shared/services/progress-bar.service';
 import { Auth } from '@aws-amplify/auth';
 import { UserData, AuthService } from './auth/services/auth.service';
-import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map, shareReplay } from 'rxjs/operators';
@@ -14,11 +14,11 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit   {
+export class AppComponent implements OnInit {
   title = 'sigo';
   user: UserData;
   isLoggedIn = false;
-  isLoadingProgressBar = false;
+  isLoading = false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -30,6 +30,9 @@ export class AppComponent implements OnInit   {
               private router: Router, private ref: ChangeDetectorRef , private zone: NgZone,
               private progressBarService: ProgressBarService, private httpClient: HttpClient) {
     this.user = this.authService.getUserData();
+    this.progressBarService.isLoading$.subscribe(isLoading => {
+      this.isLoading = isLoading;
+    });
   }
 
   ngOnInit(): void {
@@ -38,11 +41,6 @@ export class AppComponent implements OnInit   {
       this.isLoggedIn = true;
       this.user = user;
       this.router.navigate(['/dashboard']);
-
-    });
-
-    this.progressBarService.isLoading$.subscribe(isLoading => {
-      this.isLoadingProgressBar = isLoading;
     });
   }
 

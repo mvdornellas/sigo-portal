@@ -16,17 +16,14 @@ export class ComplianceService {
 
     async get(id): Promise<ComplianceModel> {
         const response = await this.client
-        .get<BaseResponse<ComplianceModel>>(`companies/${id}/compliance`).toPromise().catch(e => {
-            throw e;
-        });
-        return response.data;
+        .get<BaseResponse<ComplianceModel>>(`companies/${id}/compliance`).toPromise().catch(e => e);
+        return response?.data;
     }
 
     async updateAll(companyId: string, standards: StandardModel[]): Promise<boolean>{
         const response = await this.client.put<BaseResponse<StandardModel[]>>(`companies/${companyId}/compliance`, {
             standards
         }).toPromise();
-        console.log(response);
         return response.success;
     }
 }

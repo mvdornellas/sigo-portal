@@ -16,6 +16,7 @@ import { ProgressBarService } from 'src/app/_shared/services/progress-bar.servic
 export class LoginComponent implements OnInit {
   title = 'sigo';
   user: UserData | undefined;
+  isLoading = false;
 
   @Input() error: string | null;
 
@@ -26,7 +27,11 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private notificationService: NotificationService,
-              private progressBarService: ProgressBarService) {}
+              private progressBarService: ProgressBarService) {
+                this.progressBarService.isLoading$.subscribe(isLoading => {
+                  this.isLoading = isLoading;
+                });
+              }
 
 
   ngOnInit(): void {

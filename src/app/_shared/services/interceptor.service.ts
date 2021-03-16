@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from './notification.service';
 import { AuthService } from './../../auth/services/auth.service';
 import { Inject, Injectable } from '@angular/core';
@@ -17,7 +17,8 @@ export class InterceptorService implements HttpInterceptor {
                 private progressBarService: ProgressBarService,
                 private authService: AuthService,
                 private notificationService: NotificationService,
-                private activatedRoute: ActivatedRoute) {}
+                private activatedRoute: ActivatedRoute,
+                private router: Router) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
         return from(this.handle(request, next));
@@ -36,7 +37,6 @@ export class InterceptorService implements HttpInterceptor {
             };
         } else {
             const token = this.activatedRoute.snapshot.queryParams.token;
-            console.log(token);
             if (token){
                 option.url += `?token=${token}`;
             }
@@ -45,7 +45,8 @@ export class InterceptorService implements HttpInterceptor {
         return next.handle(api)
         .toPromise()
         .catch(({error, status}) => {
-            console.log(error);
+            console.error('STATUS CODE: ', status);
+            console.error(`ERROR DATA: ${JSON.stringify(error)}`);
             switch (status) {
                 case 500:
                     this.notificationService.show('Ocorreu um erro inesperado, por favor, tente mais tarde :/', 'Entendi');
@@ -53,6 +54,7 @@ export class InterceptorService implements HttpInterceptor {
                 case 409:
                     throw error;
                 default:
+                    this.router.navigate(['/login']);
                     break;
             }
         })
