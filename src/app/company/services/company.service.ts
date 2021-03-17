@@ -14,6 +14,7 @@ export type CompanyModel = {
         id: string,
         name: string
     }>
+    complianceAssessed?: boolean
     token?: string
 };
 

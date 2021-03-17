@@ -44,6 +44,7 @@ export class CompanyComplianceComponent implements OnInit {
       if (response) {
         const { company, standards } = response;
         this.company = company;
+        this.complianceAssessed = company.complianceAssessed;
         this.form = this.formBuilder.group({
         standards: this.formBuilder.array(standards.map(a => this.addStandardRow(a)))
       });
@@ -56,7 +57,7 @@ export class CompanyComplianceComponent implements OnInit {
     return this.formBuilder.group({
       id: [id, [Validators.required]],
       name: [name, [Validators.required]],
-      rating: ['', [Validators.required]]
+      rating: [rating, [Validators.required]]
     });
 }
 
