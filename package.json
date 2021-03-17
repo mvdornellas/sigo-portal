@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~11.2.3",
     "@angular/router": "~11.2.3",
     "@aws-amplify/ui-angular": "^1.0.3",
+    "@swimlane/ngx-charts": "^17.0.1",
     "angular-star-rating": "^4.0.0-beta.3",
     "aws-amplify": "^3.3.21",
     "css-star-rating": "^1.2.4",

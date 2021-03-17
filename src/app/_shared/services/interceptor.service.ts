@@ -37,8 +37,10 @@ export class InterceptorService implements HttpInterceptor {
             };
         } else {
             const token = this.activatedRoute.snapshot.queryParams.token;
-            if (token){
-                option.url += `?token=${token}`;
+            if (token) {
+                option.setHeaders = {
+                    Authorization: token
+                };
             }
         }
         const api = request.clone(option);

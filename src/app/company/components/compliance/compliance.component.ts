@@ -15,7 +15,7 @@ import { ComplianceService } from '../../services/compliance.service';
 })
 export class CompanyComplianceComponent implements OnInit {
   company: CompanyModel = null;
-  complianceAlreayAssessed = false;
+  complianceAssessed = false;
   loading = false;
   form: FormGroup;
 
@@ -63,24 +63,34 @@ export class CompanyComplianceComponent implements OnInit {
   async addCompliance(): Promise<void> {
     this.validateAllFormFields(this.form);
     const standards = this.form.controls.standards as FormArray;
-    const updated = await this.complianceService.updateAll(this.company.id, standards.value);
+
+    if (this.form.valid && !this.complianceAssessed) {
+      const updated = await this.complianceService.updateAll(this.company.id, standards.value);
+      this.complianceAssessed = updated;
+    }
+
   }
 
   async ratingChange(value, index): Promise<void> {
     const standards = this.form.controls.standards as FormArray;
-    console.log(standards);
-    standards.controls[index].value.rating = value.rating;
+    const formGroup = standards.controls[index] as FormGroup;
+    formGroup.controls.rating.setValue(value.rating);
   }
 
   validateAllFormFields(formGroup: FormGroup): void {
   Object.keys(formGroup.controls).forEach(field => {
     const control = formGroup.get(field);
+    console.log(control);
     if (control instanceof FormControl) {
       control.markAsTouched({ onlySelf: true });
     } else if (control instanceof FormGroup) {
       this.validateAllFormFields(control);
+    } else if (control instanceof FormArray) {
+      formGroup.markAllAsTouched();
     }
   });
-}
+
+  }
+
 
 }

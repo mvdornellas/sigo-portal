@@ -1,6 +1,63 @@
 import { Component } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+
+export let multi = [
+  {
+    name: 'NR1',
+    series: [
+      {
+        name: 'AMBEV',
+        value: 7
+      },
+      {
+        name: 'IFOOD',
+        value: 1
+      }
+    ]
+  },
+
+  {
+    name: 'NR2',
+    series: [
+      {
+        name: 'AMBEV',
+        value: 7
+      },
+      {
+        name: 'IFOOD',
+        value: 5
+      }
+    ]
+  },
+
+  {
+    name: 'NR3',
+    series: [
+      {
+        name: 'AMBEV',
+        value: 3
+      },
+      {
+        name: 'IFOOD',
+        value: 10
+      }
+    ]
+  },
+  {
+    name: 'NR4',
+    series: [
+      {
+        name: 'STEFANINI',
+        value: 1
+      },
+      {
+        name: 'DEXTRA',
+        value: 2
+      }
+    ]
+  }
+];
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -8,26 +65,35 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  /** Based on the screen size, switch from standard to one column per row */
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
-        ];
-      }
 
-      return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 }
-      ];
-    })
-  );
+  multi: any[];
+  view: any[] = [800, 400];
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  // options
+  showXAxis = true;
+  showYAxis = true;
+  gradient = true;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Normas Técnicas';
+  showYAxisLabel = true;
+  yAxisLabel = 'Nota de Conformidade';
+  legendTitle = 'Consultorias e Acessorias';
+
+  constructor() {
+    Object.assign(this, { multi });
+  }
+
+ onSelect(data): void {
+    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  }
+
+  onActivate(data): void {
+    console.log('Activate', JSON.parse(JSON.stringify(data)));
+  }
+
+  onDeactivate(data): void {
+    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  }
+
 }

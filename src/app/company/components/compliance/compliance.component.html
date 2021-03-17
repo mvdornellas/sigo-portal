@@ -13,7 +13,7 @@
         </div>
         <div class="central-body">
 
-            <div *ngIf="!complianceAlreayAssessed && company !== null">
+            <div *ngIf="company !== null">
                     <form [formGroup]="form" *ngIf="form" (ngSubmit)="addCompliance()">
                     <mat-card>
                         <mat-card-header >
@@ -28,7 +28,7 @@
                         </mat-card-header>
                     </mat-card>
                     <mat-card>
-                        <mat-card-header >
+                        <mat-card-header *ngIf="!complianceAssessed; else elseBlock" >
                             <mat-card-title>
                                 Questionário de Avaliação
                             </mat-card-title>
@@ -36,6 +36,17 @@
                                 Preencha o questionário de avaliação abaixo para nos ajudar a melhorarmos nossa gestão de normas técnicas
                             </mat-card-subtitle>
                         </mat-card-header>
+
+                        <ng-template #elseBlock>
+                            <mat-card-header>
+                                <mat-card-title>
+                                    Avaliação Concluída <mat-icon>check_circle</mat-icon>
+                                </mat-card-title>
+                                <mat-card-subtitle>
+                                    Abaixo você consegue visualizar as suas notas de conformidade, mas não pode reavalia-las.
+                                </mat-card-subtitle>
+                            </mat-card-header>
+                        </ng-template>
                         <mat-card-content>
                             
                                 <div formArrayName="standards">
@@ -46,9 +57,9 @@
                                         <div>
                                             <p style="text-align: center; font-size: medium;">{{$index + 1}} - {{standard.value.name}} </p>
                                             <div style="padding-bottom: 10px;">
-                                                <star-rating size="medium" starRatingSpeed="noticeable" (starClickChange)="ratingChange($event, $index)" [rating]="standard.value.rating" labelPosition="right" starRatingSizes="small" [numOfStars]="10" labelText="{{form.controls['standards'].controls[$index].value.rating}}" ></star-rating>
+                                                <star-rating size="medium" [readOnly]="complianceAssessed" [disabled]="complianceAssessed" starRatingSpeed="noticeable" (starClickChange)="ratingChange($event, $index)" [rating]="standard.value.rating" labelPosition="right" starRatingSizes="small" [numOfStars]="10" labelText="{{form.controls['standards'].controls[$index].value.rating}}" ></star-rating>
                                                 <mat-error *ngIf="form.controls['standards'].controls[$index].controls['rating'].touched && form.controls['standards'].controls[$index].controls['rating'].hasError('required')">
-                                                    Avaliação é <strong>obrigatório</strong>
+                                                    Nota de avaliação é <strong>obrigatório</strong>
                                                 </mat-error>
                                             </div>
                                             
@@ -57,18 +68,10 @@
                                 </div>
                         </mat-card-content>
                                 <mat-card-actions style="text-align: center;">
-                                <button mat-flat-button style="width: 10%;" color="accent" type="submit">Enviar</button>
-
+                                <button [disabled]="loading || complianceAssessed" mat-flat-button style="width: 10%;" color="accent" type="submit">Enviar</button>
                                 </mat-card-actions>
                     </mat-card>
                 </form>
-
- 
-                
-            </div>
-
-            <div *ngIf="complianceAlreayAssessed">
-                <p style="text-align: center; font-size:large; padding: 20px;"><b>Já foi avaliado...</b></p>
             </div>
 
         </div>
