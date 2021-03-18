@@ -57,7 +57,7 @@
                                         <div>
                                             <p style="text-align: center; font-size: medium;">{{$index + 1}} - {{standard.value.name}} </p>
                                             <div style="padding-bottom: 10px;">
-                                                <star-rating size="medium" [readOnly]="complianceAssessed" [disabled]="complianceAssessed" starRatingSpeed="noticeable" (starClickChange)="ratingChange($event, $index)" [rating]="standard.value.rating" labelPosition="right" starRatingSizes="small" [numOfStars]="10" labelText="{{form.controls['standards'].controls[$index].value.rating}}" ></star-rating>
+                                                <star-rating size="medium" [readOnly]="complianceAssessed"  starRatingSpeed="noticeable" (starClickChange)="ratingChange($event, $index)" [rating]="standard.value.rating" labelPosition="right" starRatingSizes="small" numOfStars="10" labelText="{{form.controls['standards'].controls[$index].value.rating}}" ></star-rating>
                                                 <mat-error *ngIf="form.controls['standards'].controls[$index].controls['rating'].touched && form.controls['standards'].controls[$index].controls['rating'].hasError('required')">
                                                     Nota de avaliação é <strong>obrigatório</strong>
                                                 </mat-error>

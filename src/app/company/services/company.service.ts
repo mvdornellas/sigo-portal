@@ -13,6 +13,7 @@ export type CompanyModel = {
     standards?: Array<{
         id: string,
         name: string
+        rating: number
     }>
     complianceAssessed?: boolean
     token?: string
@@ -30,17 +31,5 @@ export class CompanyService {
     async getAll(): Promise<Array<CompanyModel>> {
         const { data, success } = await this.client.get<BaseResponse<Array<CompanyModel>>>(`companies`).toPromise();
         return data;
-    }
-
-    get(id: number): CompanyModel {
-        return {
-            id: '8q397323',
-            name: 'Marcos teste',
-            cnpj: 239892392,
-            email: 'dornellas13@gmail.com',
-            endHire: '7689732',
-            startHire: '2828923',
-            standards: [{id: 'NR-1', name: 'TESTE NR-1'  }, {id: 'NR-2', name: 'TESTE NR-2' }],
-        };
     }
 }

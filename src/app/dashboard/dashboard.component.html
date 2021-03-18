@@ -1,39 +1,40 @@
-<!-- <div class="grid-container">
-  <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile [colspan]="2" [rowspan]="1">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            TESTE
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-        -->
-          <ngx-charts-bar-vertical-2d 
-          [view]="view"
-          [results]="multi"
-          [gradient]="gradient"
-          [xAxis]="showXAxis"
-          [yAxis]="showYAxis"
-          [legend]="showLegend"
-          [showXAxisLabel]="showXAxisLabel"
-          [showYAxisLabel]="showYAxisLabel"
-          [xAxisLabel]="xAxisLabel"
-          [yAxisLabel]="yAxisLabel"
-          [legendTitle]="legendTitle"
-          (select)="onSelect($event)"
-          (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)">
-        </ngx-charts-bar-vertical-2d>
-        <!-- </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div> -->
+<div class="flexbox-parent">
+  <mat-card style="display: flex;">
+    <mat-card-header>
+      <mat-card-title>
+        Gráfico de Conformidade
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <ngx-charts-bar-vertical-2d *ngIf="multi && multi.length > 0; else teste"
+        [view]="view"
+        [results]="multi"
+        [gradient]="gradient"
+        [scheme]="colorScheme"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [legendTitle]="legendTitle"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [maxYAxisTickLength]="maxYAxisTickLength"
+        [legendPosition]="legendPosition"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)">
+      </ngx-charts-bar-vertical-2d>
+    
+      <ng-template #teste>
+        <p style="text-align: center; font-size:medium; padding-top: 20px;"><b>Carregando informações...</b></p>
+      </ng-template>
+    </mat-card-content>
+   
+  </mat-card>
+
+</div>
+         
+
