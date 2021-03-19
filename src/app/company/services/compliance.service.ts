@@ -26,4 +26,10 @@ export class ComplianceService {
         }).toPromise();
         return response.success;
     }
+
+    async dashboard(): Promise<CompanyModel[]> {
+        const response = await this.client
+        .get<BaseResponse<CompanyModel[]>>(`companies/compliance/dashboard`).toPromise().catch(e => e);
+        return response?.data;
+    }
 }

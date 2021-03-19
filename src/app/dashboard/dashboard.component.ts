@@ -1,3 +1,4 @@
+import { ComplianceService } from './../company/services/compliance.service';
 import { Component, OnInit } from '@angular/core';
 import { CompanyService } from '../company/services/company.service';
 
@@ -36,11 +37,11 @@ export class DashboardComponent implements OnInit {
     '#FF9E80']
   };
 
-  constructor(private companyService: CompanyService) {
+  constructor(private companyService: ComplianceService) {
   }
 
   async ngOnInit(): Promise<void> {
-    const companies = await this.companyService.getAll();
+    const companies = await this.companyService.dashboard();
     this.multi = companies
     .filter(a => a.standards.some(b => b.rating > 0))
     .map(company => {
