@@ -7,7 +7,7 @@
     </mat-card-header>
 
     <mat-card-content>
-      <ngx-charts-bar-vertical-2d *ngIf="multi && multi.length > 0; else teste"
+      <ngx-charts-bar-vertical-2d *ngIf="multi && multi.length > 0; else load"
         [view]="view"
         [results]="multi"
         [gradient]="gradient"
@@ -28,7 +28,7 @@
         (deactivate)="onDeactivate($event)">
       </ngx-charts-bar-vertical-2d>
     
-      <ng-template #teste>
+      <ng-template #load>
         <p style="text-align: center; font-size:medium; padding-top: 20px;"><b>Carregando informações...</b></p>
       </ng-template>
     </mat-card-content>
