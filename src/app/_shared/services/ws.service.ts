@@ -14,7 +14,9 @@ export class WebsocketService {
         });
         this.ws.addEventListener('message', (event) => {
             console.log('Message from server ', event.data);
-            this.notification.show(event.data, 'Obrigado!');
+            this.notification.show(event.data, 'Obrigado!', {
+                duration: 60000
+            });
         });
         this.ws.addEventListener('close', () => {
             console.log('close wss');
