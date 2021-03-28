@@ -38,6 +38,7 @@ export class DashboardComponent implements OnInit {
   };
 
   constructor(private companyService: ComplianceService) {
+    this.view = [innerWidth / 1.3, 400];
   }
 
   async ngOnInit(): Promise<void> {
@@ -56,6 +57,10 @@ export class DashboardComponent implements OnInit {
         };
     });
   }
+
+  onResize(event): void {
+    this.view = [event.target.innerWidth / 1.35, 400];
+}
 
  onSelect(data): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));

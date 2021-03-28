@@ -8,6 +8,7 @@
 
     <mat-card-content>
       <ngx-charts-bar-vertical-2d *ngIf="multi && multi.length > 0; else load"
+        (window:resize)="onResize($event)"
         [view]="view"
         [results]="multi"
         [gradient]="gradient"
