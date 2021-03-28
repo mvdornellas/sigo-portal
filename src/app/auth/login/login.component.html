@@ -14,7 +14,7 @@
     <mat-form-field>
       <input type="text" matInput placeholder="Usuário" formControlName="username" required>
       <mat-error *ngIf="loginForm.controls.username.hasError('required')">
-        O campo Usuário é obrigatório
+        O campo Usuário é <b>obrigatório</b>
     </mat-error>
     </mat-form-field>
   </p>
@@ -23,7 +23,7 @@
     <mat-form-field>
       <input type="password" matInput placeholder="Senha" formControlName="password" required>
       <mat-error *ngIf="loginForm.controls.password.hasError('required')">
-        O campo Senha é obrigatório
+        O campo Senha é <b>obrigatório</b>
     </mat-error>
     </mat-form-field>
   </p>
