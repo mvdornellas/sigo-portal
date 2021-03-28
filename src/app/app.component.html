@@ -1,5 +1,5 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav *ngIf="isLoggedIn" #drawer class="sidenav" fixedInViewport
+<mat-sidenav-container *ngIf="isLoggedIn; else login" class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
@@ -23,8 +23,7 @@
   </mat-sidenav>
   <mat-sidenav-content style="min-height: 100vh;">
     <mat-progress-bar *ngIf="isLoading" mode="query" color="accent"></mat-progress-bar>
-
-    <mat-toolbar *ngIf="isLoggedIn" color="primary">
+    <mat-toolbar color="primary">
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -43,11 +42,14 @@
       </button>
 
     </mat-toolbar>
-    <lib-mat-breadcrumb *ngIf="isLoggedIn" bgColor="#303030" fontColor="#fff" lastLinkColor="#69f0ae" fontSize="8px"></lib-mat-breadcrumb>
-
+    <lib-mat-breadcrumb bgColor="#303030" fontColor="#fff" lastLinkColor="#69f0ae" fontSize="8px"></lib-mat-breadcrumb>
     <router-outlet></router-outlet>
-
-      
-
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<ng-template #login>
+  <mat-sidenav-container  style="min-height: 100vh;" class="sidenav-container">
+    <mat-progress-bar *ngIf="isLoading" mode="query" color="accent"></mat-progress-bar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-container>
+</ng-template>
