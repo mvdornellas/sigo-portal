@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseResponse } from 'src/app/_shared/services/base.service.response';
-import { CompanyModel } from './company.service';
 
 export type StandardModel = {
     id: string

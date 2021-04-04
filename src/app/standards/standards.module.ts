@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StandardService } from './servies/standard.service';
+import { StandardService } from './services/standard.service';
 import { StandardDropdownComponent } from './components/dropdown/dropdown.component';
 
 

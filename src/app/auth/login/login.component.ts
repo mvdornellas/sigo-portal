@@ -17,6 +17,32 @@ export class LoginComponent implements OnInit {
   title = 'sigo';
   user: UserData | undefined;
   isLoading = false;
+  // signUpformFields = [
+  //   {
+  //     type: 'username',
+  //     label: 'Username',
+  //     placeholder: 'Username',
+  //     required: false
+  //   },
+  //   {
+  //     type: 'email',
+  //     label: 'Email',
+  //     placeholder: 'Email',
+  //     required: true
+  //   },
+  //   {
+  //     type: 'name',
+  //     label: 'Nome',
+  //     placeholder: 'Nome',
+  //     required: true
+  //   },
+  //   {
+  //     type: 'password',
+  //     label: 'Senha',
+  //     placeholder: 'Senha',
+  //     required: true
+  //   }
+  // ];
 
   @Input() error: string | null;
 
