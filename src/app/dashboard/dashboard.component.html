@@ -6,8 +6,8 @@
       </mat-card-title>
     </mat-card-header>
 
-    <mat-card-content>
-      <ngx-charts-bar-vertical-2d *ngIf="multi && multi.length > 0; else load"
+    <mat-card-content *ngIf="!isLoading; else load">
+      <ngx-charts-bar-vertical-2d *ngIf="multi && multi.length > 0; else noItems"
         (window:resize)="onResize($event)"
         [view]="view"
         [results]="multi"
@@ -28,11 +28,15 @@
         (activate)="onActivate($event)"
         (deactivate)="onDeactivate($event)">
       </ngx-charts-bar-vertical-2d>
-    
-      <ng-template #load>
-        <p style="text-align: center; font-size:medium; padding-top: 20px;"><b>Carregando informações...</b></p>
+
+      <ng-template #noItems>
+        <p style="text-align: center; font-size:medium; padding-top: 20px;"><b>Ainda não temos formulários de conformidade preenchido!</b></p>
       </ng-template>
+     
     </mat-card-content>
+    <ng-template #load>
+      <p style="text-align: center; font-size:medium; padding-top: 20px;"><b>Carregando informações...</b></p>
+    </ng-template>
    
   </mat-card>
 

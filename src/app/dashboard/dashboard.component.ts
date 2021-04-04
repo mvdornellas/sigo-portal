@@ -1,6 +1,7 @@
 import { ComplianceService } from './../company/services/compliance.service';
 import { Component, OnInit } from '@angular/core';
 import { CompanyService } from '../company/services/company.service';
+import { ProgressBarService } from '../_shared/services/progress-bar.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +9,7 @@ import { CompanyService } from '../company/services/company.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+  isLoading =  false;
   multi: any[];
   view: any[] = [1980, 600];
 
@@ -37,7 +38,10 @@ export class DashboardComponent implements OnInit {
     '#FF9E80']
   };
 
-  constructor(private companyService: ComplianceService) {
+  constructor(private companyService: ComplianceService, private progressBarService: ProgressBarService) {
+    this.progressBarService.isLoading$.subscribe(isLoading => {
+      this.isLoading = isLoading;
+    });
     this.view = [innerWidth / 1.3, 400];
   }
 
