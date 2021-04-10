@@ -10,14 +10,14 @@ export const companyRoutes: Routes = [{
     component: CompanyTableComponent,
     canActivate: [AuthGuard],
     data: {
-      title: 'Consultoria e Acessorias',
+      title: 'Consultoria e Assessorias',
       breadcrumb: [
         {
           label: 'Dashboard',
           url: '/dashboard'
         },
         {
-          label: 'Consultoria e Acessorias',
+          label: 'Consultoria e Assessorias',
           url: ''
         }
       ]
@@ -28,14 +28,14 @@ export const companyRoutes: Routes = [{
     component: CompanyAddComponent,
     canActivate: [AuthGuard],
     data: {
-      title: 'Consultoria e Acessorias',
+      title: 'Consultoria e Assessorias',
       breadcrumb: [
         {
           label: 'Dashboard',
           url: '/dashboard'
         },
         {
-          label: 'Consultoria e Acessorias',
+          label: 'Consultoria e Assessorias',
           url: '/company'
         },
         {

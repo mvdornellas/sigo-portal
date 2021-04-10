@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   gradient = true;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Consultorias e Acessorias';
+  xAxisLabel = 'Consultorias e Assessorias';
   showYAxisLabel = true;
   yAxisLabel = 'Nota de Conformidade';
   legendTitle = 'Normas Técnicas';
